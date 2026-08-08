@@ -2,15 +2,27 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta
       name="description"
-      content="RanToAtlanta — Shots Set’s It Off by Hot Boys. Lyrics, credits, and Cash Money bounce archive."
+      content="RanToAtlanta — annotate Hot Boys lyrics, stack IQ, climb the live leaderboard. Southern bounce archive."
     />
     <meta name="theme-color" content="#ff8a1f" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta property="og:title" content="RanToAtlanta — Shots Set’s It Off" />
+    <meta
+      property="og:description"
+      content="Genius-style annotations · FOMO IQ points · live leaderboard. Set it off."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="assets/img/cover.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
     <title>Hot Boys – Shots Set’s It Off Lyrics | RanToAtlanta</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="apple-touch-icon" href="assets/img/cover.jpg" />
     <link rel="stylesheet" href="assets/css/site.css" />
+    <link rel="stylesheet" href="assets/css/mobile.css" />
   </head>
   <body>
     <a class="skip" href="#lyrics">Skip to lyrics</a>
@@ -22,10 +34,10 @@
         <span class="pulse" id="hud-pulse">+1 live</span>
       </div>
       <div class="hud-right">
-        <a class="ghost" href="#board">Leaderboard</a>
+        <a class="ghost hud-hide-sm" href="#board">Board</a>
         <button type="button" class="ghost" id="open-dms">DMs</button>
-        <a class="ghost" href="brand.html">Brand kit</a>
-        <a class="ghost" href="#signup">Join · +200</a>
+        <a class="ghost hud-hide-sm" href="brand.html">Brand</a>
+        <a class="ghost" href="#signup">Join</a>
       </div>
     </div>
 
@@ -38,13 +50,17 @@
     <header class="site-header">
       <nav class="nav" aria-label="Primary">
         <a class="brand" href="./" id="brand-logo" title="Click logo to refresh">RanToAtlanta</a>
-        <div class="nav-links">
+        <button type="button" class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-links">
+          Menu
+        </button>
+        <div class="nav-links" id="nav-links">
           <a href="#lyrics">Lyrics</a>
           <a href="#board">Board</a>
           <a href="#about">About</a>
           <a href="#video">Video</a>
           <a href="#comments">Social</a>
           <a href="brand.html">Brand</a>
+          <a href="#signup">Join · +200</a>
         </div>
         <div class="nav-right">
           <a class="signup" href="#signup">Sign Up</a>
@@ -501,6 +517,14 @@
     </aside>
 
     <div id="points-toast" role="status"></div>
+
+    <nav class="mobile-dock" aria-label="Mobile">
+      <a href="#lyrics"><span class="ico">≡</span>Lyrics</a>
+      <a href="#board"><span class="ico">▲</span>Board</a>
+      <a href="#video"><span class="ico">▶</span>Play</a>
+      <button type="button" id="dock-dm"><span class="ico">✉</span>DMs</button>
+      <a href="#signup"><span class="ico">★</span>Join</a>
+    </nav>
 
     <footer class="footer">
       <div class="footer-grid">

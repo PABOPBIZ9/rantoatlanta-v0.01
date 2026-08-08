@@ -1361,10 +1361,6 @@ input {
 }
 
 @media (max-width: 720px) {
-  .hud {
-    position: relative;
-  }
-
   .rewards-grid,
   .drop-map {
     grid-template-columns: 1fr;

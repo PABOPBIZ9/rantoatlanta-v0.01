@@ -16,6 +16,29 @@
     });
   }
 
+  // —— Mobile nav ——
+  const navToggle = document.getElementById("nav-toggle");
+  const navLinks = document.getElementById("nav-links");
+  navToggle?.addEventListener("click", () => {
+    const open = navLinks?.classList.toggle("open");
+    navToggle.setAttribute("aria-expanded", open ? "true" : "false");
+    navToggle.textContent = open ? "Close" : "Menu";
+    P.earn("click");
+  });
+  navLinks?.querySelectorAll("a").forEach((a) => {
+    a.addEventListener("click", () => {
+      navLinks.classList.remove("open");
+      if (navToggle) {
+        navToggle.setAttribute("aria-expanded", "false");
+        navToggle.textContent = "Menu";
+      }
+    });
+  });
+
+  document.getElementById("dock-dm")?.addEventListener("click", () => {
+    document.getElementById("open-dms")?.click();
+  });
+
   // —— HUD / FOMO ticker ——
   const hudPoints = document.getElementById("hud-points");
   const hudRank = document.getElementById("hud-rank");

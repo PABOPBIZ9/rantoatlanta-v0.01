@@ -28,6 +28,10 @@ Genius-inspired bounce lyrics archive for **Hot Boys — Shots Set’s It Off**,
 
 See `brand/DROP.md` and `media/DROP.md`.
 
+## Mobile
+
+Mobile-first layout with sticky IQ HUD, hamburger menu, and bottom dock (Lyrics / Board / Play / DMs / Join). Safe-area aware for notched phones.
+
 ## Local preview
 
 ```bash

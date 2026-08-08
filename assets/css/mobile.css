@@ -1,0 +1,619 @@
+/* RanToAtlanta — mobile-first launch polish
+   Base = phone. Scale up with min-width. */
+
+:root {
+  --rta-pad: 1rem;
+  --rta-hud-h: 52px;
+  --rta-dock-h: 64px;
+  --safe-b: env(safe-area-inset-bottom, 0px);
+  --safe-t: env(safe-area-inset-top, 0px);
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  overflow-x: hidden;
+  padding-bottom: calc(var(--rta-dock-h) + var(--safe-b) + 0.5rem);
+}
+
+img,
+video,
+iframe {
+  max-width: 100%;
+  height: auto;
+}
+
+/* —— Sticky compact HUD —— */
+.hud {
+  position: sticky;
+  top: 0;
+  z-index: 45;
+  padding: calc(0.45rem + var(--safe-t)) var(--rta-pad) 0.45rem;
+  gap: 0.5rem;
+  flex-wrap: nowrap;
+  min-height: var(--rta-hud-h);
+}
+
+.hud-left {
+  gap: 0.55rem;
+  min-width: 0;
+}
+
+.hud-right {
+  gap: 0.35rem;
+  margin-left: auto;
+}
+
+.hud .stat {
+  font-size: 0.78rem;
+}
+
+.hud .stat em {
+  font-size: 1.05rem;
+}
+
+.hud .pulse {
+  display: none;
+}
+
+.hud .ghost {
+  min-height: 36px;
+  padding: 0.35rem 0.65rem;
+  font-size: 0.75rem;
+  white-space: nowrap;
+}
+
+.hud .ghost.hud-hide-sm {
+  display: none;
+}
+
+/* —— Ad strip: compact on phone —— */
+.ad-strip {
+  min-height: 0;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.5rem 0.75rem;
+  padding: 0.55rem var(--rta-pad);
+  font-size: 0.75rem;
+}
+
+.ad-strip span {
+  display: none;
+}
+
+.ad-strip .pill {
+  min-height: 36px;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* —— Nav —— */
+.nav {
+  padding: 0.7rem var(--rta-pad);
+  gap: 0.65rem;
+  flex-wrap: wrap;
+}
+
+.brand {
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+.nav-links {
+  display: none;
+}
+
+.nav-links.open {
+  display: flex;
+  width: 100%;
+  order: 3;
+  flex-direction: column;
+  gap: 0;
+  background: rgba(255, 255, 255, 0.22);
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 12px;
+  padding: 0.35rem;
+  animation: rise 0.25s ease both;
+}
+
+.nav-links.open a {
+  padding: 0.75rem 0.85rem;
+  min-height: 44px;
+  text-decoration: none;
+  font-weight: 700;
+  border-radius: 8px;
+}
+
+.nav-links.open a:hover,
+.nav-links.open a:active {
+  background: rgba(255, 255, 255, 0.45);
+}
+
+.nav-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+  min-width: 44px;
+  min-height: 44px;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  background: rgba(255, 255, 255, 0.35);
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 800;
+  font-size: 0.85rem;
+}
+
+.nav-right {
+  width: 100%;
+  order: 4;
+  gap: 0.5rem;
+}
+
+.nav-right .signup {
+  display: none;
+}
+
+.search {
+  flex: 1;
+  min-width: 0;
+  min-height: 44px;
+  padding: 0.45rem 0.85rem;
+}
+
+.search input {
+  font-size: 16px; /* iOS zoom prevent */
+}
+
+/* —— Hero: mobile composition —— */
+.song-hero {
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  padding: 0.5rem var(--rta-pad) 1.5rem;
+}
+
+.cover {
+  width: min(200px, 56vw);
+  margin: 0 auto;
+  border-radius: 4px;
+}
+
+.song-meta {
+  text-align: center;
+}
+
+.song-meta h1 {
+  font-size: clamp(1.85rem, 9vw, 2.6rem);
+  margin-bottom: 0.25rem;
+}
+
+.song-meta .artist {
+  font-size: 1.15rem;
+}
+
+.credits-row {
+  grid-template-columns: 1fr 1fr;
+  text-align: left;
+  max-width: 360px;
+  margin-left: auto;
+  margin-right: auto;
+  gap: 0.65rem;
+}
+
+.album-line,
+.meta-icons {
+  justify-content: center;
+}
+
+.meta-icons {
+  font-size: 0.85rem;
+}
+
+.media-rail {
+  max-width: 100%;
+}
+
+.media-main {
+  border-radius: 8px;
+}
+
+.thumb-row {
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.35rem;
+}
+
+.thumb-row a {
+  border-radius: 6px;
+  min-height: 44px;
+}
+
+/* —— Lyrics page —— */
+.page {
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  padding: 1.25rem var(--rta-pad) 2rem;
+}
+
+.lyrics {
+  font-size: 1.02rem;
+  line-height: 1.6;
+}
+
+.lyrics .line {
+  padding: 0.28rem 1.5rem 0.28rem 0.25rem;
+  margin: 0 -0.25rem;
+  border-radius: 4px;
+  min-height: 1.7em;
+}
+
+.share-row {
+  gap: 0.4rem;
+}
+
+.share-row button {
+  min-height: 44px;
+  flex: 1 1 calc(50% - 0.4rem);
+  font-size: 0.82rem;
+  padding: 0.5rem 0.65rem;
+}
+
+.sidebar-stack {
+  position: static;
+}
+
+.panel-card,
+.ad-card {
+  border-radius: 12px;
+}
+
+/* —— Bands / sections —— */
+.band,
+.band.tan {
+  padding: 2.25rem var(--rta-pad);
+}
+
+.band-inner {
+  max-width: 100%;
+}
+
+.tracklist,
+.credits-grid,
+.album-panel,
+.rewards-grid,
+.drop-map,
+.footer-grid {
+  grid-template-columns: 1fr;
+}
+
+.album-panel {
+  justify-items: center;
+  text-align: center;
+}
+
+.album-panel img {
+  width: min(180px, 50vw);
+}
+
+.video-wrap {
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.comments {
+  padding: 2rem var(--rta-pad) 2.5rem;
+}
+
+.comments textarea,
+.join-box input,
+.drawer textarea {
+  font-size: 16px;
+  min-height: 96px;
+  border-radius: 10px;
+}
+
+.comment-actions button,
+.join-row button,
+.ask-btn,
+.drawer .actions button {
+  min-height: 48px;
+  width: 100%;
+  justify-content: center;
+}
+
+.comment-actions,
+.join-row {
+  flex-direction: column;
+}
+
+.comment-card {
+  gap: 0.5rem;
+}
+
+.vote {
+  min-width: 40px;
+  min-height: 36px;
+  font-size: 1rem;
+}
+
+/* —— Full-screen drawers on phone —— */
+.drawer {
+  width: 100%;
+  padding: calc(0.85rem + var(--safe-t)) var(--rta-pad) calc(1rem + var(--safe-b));
+  border-radius: 0;
+}
+
+.drawer header button {
+  min-height: 44px;
+  min-width: 72px;
+}
+
+/* —— Bottom dock (mobile primary nav) —— */
+.mobile-dock {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 46;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0;
+  background: rgba(17, 17, 17, 0.96);
+  color: #fff;
+  border-top: 2px solid var(--rta-flame);
+  padding: 0.35rem 0.25rem calc(0.35rem + var(--safe-b));
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.mobile-dock a,
+.mobile-dock button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.15rem;
+  min-height: 52px;
+  border: 0;
+  background: transparent;
+  color: #fff;
+  text-decoration: none;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.mobile-dock a:active,
+.mobile-dock button:active,
+.mobile-dock a:hover,
+.mobile-dock button:hover {
+  background: rgba(255, 138, 31, 0.18);
+  color: var(--rta-gold);
+}
+
+.mobile-dock .ico {
+  font-size: 1.05rem;
+  line-height: 1;
+}
+
+#points-toast {
+  bottom: calc(var(--rta-dock-h) + var(--safe-b) + 0.75rem);
+  left: 50%;
+  right: auto;
+  transform: translate(-50%, 12px);
+  white-space: nowrap;
+}
+
+#points-toast.show {
+  transform: translate(-50%, 0);
+}
+
+.footer {
+  padding: 2.25rem var(--rta-pad) 1.25rem;
+}
+
+.artist-index {
+  font-size: 0.68rem;
+  word-break: break-word;
+}
+
+/* Tap highlight */
+a,
+button {
+  -webkit-tap-highlight-color: rgba(255, 106, 0, 0.15);
+}
+
+/* —— Tablet+ —— */
+@media (min-width: 640px) {
+  :root {
+    --rta-pad: 1.25rem;
+  }
+
+  .ad-strip span {
+    display: inline;
+  }
+
+  .hud .pulse {
+    display: inline;
+  }
+
+  .hud .ghost.hud-hide-sm {
+    display: inline-flex;
+  }
+
+  .cover {
+    margin: 0;
+  }
+
+  .song-meta {
+    text-align: left;
+  }
+
+  .album-line,
+  .meta-icons {
+    justify-content: flex-start;
+  }
+
+  .credits-row {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .song-hero {
+    grid-template-columns: 160px 1fr;
+    align-items: start;
+  }
+
+  .media-rail {
+    grid-column: 1 / -1;
+    max-width: 420px;
+  }
+
+  .share-row button {
+    flex: 0 1 auto;
+  }
+
+  .comment-actions,
+  .join-row {
+    flex-direction: row;
+  }
+
+  .comment-actions button,
+  .join-row button,
+  .ask-btn,
+  .drawer .actions button {
+    width: auto;
+  }
+
+  .rewards-grid,
+  .drop-map,
+  .tracklist {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* —— Desktop —— */
+@media (min-width: 900px) {
+  body {
+    padding-bottom: 0;
+  }
+
+  .mobile-dock {
+    display: none;
+  }
+
+  .nav-toggle {
+    display: none;
+  }
+
+  .nav-links {
+    display: flex;
+    flex-direction: row;
+    width: auto;
+    order: 0;
+    background: none;
+    border: 0;
+    padding: 0;
+    gap: 0.85rem 1.1rem;
+  }
+
+  .nav-links a {
+    padding: 0;
+    min-height: 0;
+  }
+
+  .nav-right {
+    width: auto;
+    order: 0;
+    margin-left: auto;
+  }
+
+  .nav-right .signup {
+    display: inline;
+  }
+
+  .song-hero {
+    grid-template-columns: 220px 1fr minmax(220px, 300px);
+    padding: 1rem 1.25rem 2rem;
+  }
+
+  .media-rail {
+    grid-column: auto;
+    max-width: none;
+  }
+
+  .page {
+    grid-template-columns: minmax(0, 1fr) 280px;
+    gap: 2.5rem;
+    max-width: var(--rta-max);
+  }
+
+  .sidebar-stack {
+    position: sticky;
+    top: calc(var(--rta-hud-h) + 0.75rem);
+  }
+
+  .drawer {
+    width: min(400px, 100%);
+  }
+
+  .tracklist,
+  .credits-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .rewards-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .footer-grid {
+    grid-template-columns: 1.4fr 1fr 1fr;
+  }
+
+  #points-toast {
+    left: auto;
+    right: 1rem;
+    bottom: 1.25rem;
+    transform: translateY(12px);
+  }
+
+  #points-toast.show {
+    transform: none;
+  }
+}
+
+@media (min-width: 1100px) {
+  .cover {
+    width: 100%;
+  }
+
+  .song-meta h1 {
+    font-size: clamp(2.4rem, 4vw, 3.4rem);
+  }
+}
+
+/* Landscape phones */
+@media (max-height: 480px) and (orientation: landscape) {
+  .mobile-dock {
+    grid-template-columns: repeat(5, 1fr);
+    padding-bottom: var(--safe-b);
+  }
+
+  .song-hero {
+    grid-template-columns: 120px 1fr;
+  }
+
+  .cover {
+    width: 120px;
+  }
+}
