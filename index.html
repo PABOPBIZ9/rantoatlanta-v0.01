@@ -15,21 +15,36 @@
   <body>
     <a class="skip" href="#lyrics">Skip to lyrics</a>
 
+    <div class="hud" id="hud" aria-live="polite">
+      <div class="hud-left">
+        <span class="stat">IQ <em id="hud-points">88</em></span>
+        <span class="stat">Rank <em id="hud-rank">#—</em></span>
+        <span class="pulse" id="hud-pulse">+1 live</span>
+      </div>
+      <div class="hud-right">
+        <a class="ghost" href="#board">Leaderboard</a>
+        <button type="button" class="ghost" id="open-dms">DMs</button>
+        <a class="ghost" href="brand.html">Brand kit</a>
+        <a class="ghost" href="#signup">Join · +200</a>
+      </div>
+    </div>
+
     <div class="ad-strip">
       <strong>RAN TO ATLANTA</strong>
-      <span>Southern bounce archive · Cash Money classics · Set it off</span>
+      <span>Annotate · upvote · share · stack IQ · points never sleep</span>
       <a class="pill" href="#video">Play the cut</a>
     </div>
 
     <header class="site-header">
       <nav class="nav" aria-label="Primary">
-        <a class="brand" href="./" id="brand-logo" title="Refresh RanToAtlanta">RanToAtlanta</a>
+        <a class="brand" href="./" id="brand-logo" title="Click logo to refresh">RanToAtlanta</a>
         <div class="nav-links">
           <a href="#lyrics">Lyrics</a>
+          <a href="#board">Board</a>
           <a href="#about">About</a>
-          <a href="#album">Album</a>
           <a href="#video">Video</a>
-          <a href="#comments">Comments</a>
+          <a href="#comments">Social</a>
+          <a href="brand.html">Brand</a>
         </div>
         <div class="nav-right">
           <a class="signup" href="#signup">Sign Up</a>
@@ -252,20 +267,35 @@
             </div>
           </div>
 
+          <p class="muted" style="margin-top: 0.5rem">
+            Click any line to annotate like Genius — each note earns <strong>+100 IQ</strong>.
+          </p>
+
           <div class="share-row" aria-label="Share">
-            <button type="button" data-share="facebook">Facebook</button>
-            <button type="button" data-share="x">X</button>
-            <button type="button" data-share="iq">⚡ 1</button>
-            <button type="button" data-share="embed">Embed</button>
+            <button type="button" data-share="facebook">Facebook · +50</button>
+            <button type="button" data-share="x">X · +50</button>
+            <button type="button" data-share="iq">⚡ IQ</button>
+            <button type="button" data-share="embed">Embed · +50</button>
           </div>
         </article>
 
         <aside class="sidebar">
-          <div class="ad-card">
-            <div class="eyebrow">From RanToAtlanta</div>
-            <h3>50 shots. One bounce capital.</h3>
-            <img src="assets/img/cover.jpg" alt="" />
-            <a class="btn" href="#video">Play now</a>
+          <div class="sidebar-stack" id="board">
+            <div class="panel-card">
+              <h3>Live leaderboard</h3>
+              <p class="hint">Scores climb even while you watch. Don't get passed.</p>
+              <ol id="leaderboard"></ol>
+            </div>
+            <div class="panel-card">
+              <h3>Live feed</h3>
+              <ul id="live-feed"></ul>
+            </div>
+            <div class="ad-card">
+              <div class="eyebrow">From RanToAtlanta</div>
+              <h3>50 shots. One bounce capital.</h3>
+              <img src="assets/img/cover.jpg" alt="" />
+              <a class="btn" href="#video">Play now · +25 watch</a>
+            </div>
           </div>
         </aside>
       </section>
@@ -383,8 +413,15 @@
       </section>
 
       <section class="comments" id="comments">
-        <h2>Comments</h2>
-        <textarea id="comment-box" placeholder="Add a comment" aria-label="Add a comment"></textarea>
+        <h2>Social · Comments</h2>
+        <p class="muted">Reddit-style upvotes · DM · repost · every move stacks IQ</p>
+        <textarea id="comment-box" placeholder="Add a comment (+40 IQ)" aria-label="Add a comment"></textarea>
+        <div class="comment-actions">
+          <button type="button" id="comment-post">Post · +40</button>
+          <button type="button" class="secondary" id="open-dms-2" onclick="document.getElementById('open-dms').click()">
+            Open DMs · +30
+          </button>
+        </div>
         <p class="empty" id="comment-empty">
           Get the conversation started<br />
           Be the first to comment
@@ -393,14 +430,77 @@
       </section>
 
       <section class="signup-band" id="signup">
-        <h2>Sign Up And Drop Knowledge</h2>
-        <p>
-          RanToAtlanta is a bounce archive — lyrics, credits, and southern classics for scholars who
-          still set it off.
-        </p>
-        <a class="btn" href="#comments">Sign Up</a>
+        <h2>Join &amp; Drop Knowledge</h2>
+        <p>Pick a name, claim +200 IQ, then annotate, upvote, share, and climb.</p>
+        <div class="join-box">
+          <input id="display-name" type="text" maxlength="24" aria-label="Display name" />
+          <div class="join-row">
+            <button type="button" id="join-btn">Join RanToAtlanta · +200</button>
+            <span id="join-status" class="muted"></span>
+          </div>
+          <div class="rewards-grid">
+            <div><strong>+1</strong> every click</div>
+            <div><strong>+2</strong> scroll</div>
+            <div><strong>+25</strong> watch video</div>
+            <div><strong>+40</strong> comment</div>
+            <div><strong>+50</strong> share / embed</div>
+            <div><strong>+75</strong> repost</div>
+            <div><strong>+100</strong> annotate a line</div>
+            <div><strong>+5</strong> upvote</div>
+            <div><strong>+30</strong> DM</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="band tan" id="drops">
+        <div class="band-inner">
+          <h2>Drop folders ready</h2>
+          <p>Dump HQ assets into these paths — brand kit + media already wired.</p>
+          <div class="drop-map">
+            <div><code>brand/logos/</code> color · black · white · gold</div>
+            <div><code>brand/promo/</code> banners · social · stickers · posters</div>
+            <div><code>media/images/hq/</code> print-quality stills</div>
+            <div><code>media/audio/</code> tracks · stems · samples</div>
+            <div><code>media/video/</code> clips · full · promo</div>
+            <div><code>drops/</code> staging for community packs</div>
+          </div>
+          <p style="margin-top: 1rem"><a class="ask-btn" href="brand.html">Open brand kit</a></p>
+        </div>
       </section>
     </main>
+
+    <aside class="drawer" id="annotate-panel" aria-label="Annotate lyrics">
+      <header>
+        <div>
+          <h3>Annotate</h3>
+          <span class="muted">Genius-style · +100 IQ</span>
+        </div>
+        <button type="button" class="ghost" id="annotate-close" style="border:1px solid #111;color:#111;background:#fff;border-radius:999px;padding:.3rem .7rem;cursor:pointer">Close</button>
+      </header>
+      <div class="line-quote" id="annotate-line">Select a lyric line</div>
+      <textarea id="annotate-body" placeholder="Drop knowledge on this line…"></textarea>
+      <div class="actions">
+        <button type="button" id="annotate-save">Save note · +100</button>
+      </div>
+      <div class="ann-list" id="annotate-list"></div>
+    </aside>
+
+    <aside class="drawer" id="dm-panel" aria-label="Direct messages">
+      <header>
+        <div>
+          <h3>DMs</h3>
+          <span class="muted">Chatting with <strong id="dm-to">BounceQueenATL</strong></span>
+        </div>
+        <button type="button" id="dm-close" style="border:1px solid #111;background:#fff;border-radius:999px;padding:.3rem .7rem;cursor:pointer">Close</button>
+      </header>
+      <div class="dm-thread" id="dm-thread"></div>
+      <textarea id="dm-body" placeholder="Send a DM · +30 IQ"></textarea>
+      <div class="actions">
+        <button type="button" id="dm-send">Send · +30</button>
+      </div>
+    </aside>
+
+    <div id="points-toast" role="status"></div>
 
     <footer class="footer">
       <div class="footer-grid">
@@ -416,13 +516,13 @@
         <div class="footer-col">
           <a href="#about">About</a>
           <a href="#lyrics">Lyrics</a>
-          <a href="#album">Album</a>
+          <a href="#board">Leaderboard</a>
           <a href="#video">Video</a>
         </div>
         <div class="footer-col">
-          <a href="#credits">Credits</a>
-          <a href="#comments">Comments</a>
-          <a href="#signup">Sign In</a>
+          <a href="#comments">Social</a>
+          <a href="#signup">Join</a>
+          <a href="brand.html">Brand kit</a>
           <a href="https://genius.com/Hot-boys-shots-sets-it-off-lyrics" rel="noopener" target="_blank"
             >Source on Genius</a
           >
@@ -440,6 +540,7 @@
       </div>
     </footer>
 
+    <script src="assets/js/points.js"></script>
     <script src="assets/js/site.js"></script>
   </body>
 </html>

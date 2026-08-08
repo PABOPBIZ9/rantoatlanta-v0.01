@@ -1,0 +1,18 @@
+{
+  "name": "RanToAtlanta",
+  "colors": {
+    "flame": "#ff8a1f",
+    "gold": "#ffc53d",
+    "ember": "#ff6a00",
+    "ink": "#111111",
+    "soft": "#f4f4f4",
+    "peach": "#ffb366",
+    "tan": "#f7d794",
+    "footer": "#121212"
+  },
+  "fonts": {
+    "display": "Archivo Black",
+    "body": "IBM Plex Sans"
+  },
+  "tagline": "Southern bounce archive. Set it off."
+}

@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="RanToAtlanta brand kit — logos, colors, promo drops, media folders." />
+    <meta name="theme-color" content="#ff8a1f" />
+    <title>Brand Kit · RanToAtlanta</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="stylesheet" href="assets/css/site.css" />
+  </head>
+  <body>
+    <div class="hud">
+      <div class="hud-left">
+        <a class="brand" href="./" id="brand-logo" style="color:#fff;text-decoration:none;font-family:var(--rta-display)">RanToAtlanta</a>
+        <span class="pulse">Logo click = refresh</span>
+      </div>
+      <div class="hud-right">
+        <a class="ghost" href="./">Lyrics</a>
+        <a class="ghost" href="./#board">Leaderboard</a>
+        <a class="ghost" href="./#signup">Join · +200</a>
+      </div>
+    </div>
+
+    <header class="site-header" style="padding-bottom:2.5rem">
+      <div class="song-hero" style="grid-template-columns:1fr;max-width:900px">
+        <div class="song-meta">
+          <h1>Brand kit</h1>
+          <p class="album-line">Drop logos, HQ stills, audio, video, and promo into the folders below. Click the wordmark anytime to refresh.</p>
+        </div>
+      </div>
+    </header>
+
+    <main class="comments" style="max-width:900px">
+      <section>
+        <h2>Colors</h2>
+        <div class="rewards-grid">
+          <div style="background:#ff8a1f;color:#111"><strong style="color:#111">Flame</strong>#ff8a1f</div>
+          <div style="background:#ffc53d;color:#111"><strong style="color:#111">Gold</strong>#ffc53d</div>
+          <div style="background:#ff6a00;color:#fff"><strong style="color:#fff">Ember</strong>#ff6a00</div>
+          <div style="background:#111;color:#fff"><strong style="color:#ffc53d">Ink</strong>#111111</div>
+          <div style="background:#ffb366;color:#111"><strong style="color:#111">Peach</strong>#ffb366</div>
+          <div style="background:#f7d794;color:#111"><strong style="color:#111">Tan</strong>#f7d794</div>
+        </div>
+        <p class="muted">Tokens: <code>brand/colors/brand-tokens.json</code></p>
+      </section>
+
+      <section style="margin-top:2.5rem">
+        <h2>Drop map</h2>
+        <div class="drop-map">
+          <div><code>brand/logos/color/</code> Primary logos</div>
+          <div><code>brand/logos/black/</code> Black logos</div>
+          <div><code>brand/logos/white/</code> White logos</div>
+          <div><code>brand/logos/gold/</code> Gold / flame logos</div>
+          <div><code>brand/favicon/</code> Favicon pack</div>
+          <div><code>brand/typography/</code> Fonts</div>
+          <div><code>brand/guidelines/</code> Brand PDF / rules</div>
+          <div><code>brand/promo/banners/</code> Site banners</div>
+          <div><code>brand/promo/social/</code> IG / X / TikTok</div>
+          <div><code>brand/promo/stickers/</code> Sticker sheets</div>
+          <div><code>brand/promo/posters/</code> Print posters</div>
+          <div><code>brand/swag/</code> Merch mockups</div>
+          <div><code>media/images/hq/</code> HQ stills</div>
+          <div><code>media/images/hero/</code> Full-bleed heroes</div>
+          <div><code>media/images/album/</code> Covers</div>
+          <div><code>media/images/og/</code> Social share cards</div>
+          <div><code>media/audio/tracks/</code> Full audio</div>
+          <div><code>media/audio/stems/</code> Stems</div>
+          <div><code>media/audio/samples/</code> Tags / samples</div>
+          <div><code>media/video/clips/</code> Short clips</div>
+          <div><code>media/video/full/</code> Full videos</div>
+          <div><code>media/video/promo/</code> Promo cuts</div>
+          <div><code>media/gifs/</code> GIFs</div>
+          <div><code>drops/</code> Community staging</div>
+          <div><code>community/avatars/</code> Avatars</div>
+          <div><code>community/memes/</code> Meme templates</div>
+        </div>
+      </section>
+
+      <section style="margin-top:2.5rem">
+        <h2>Logo rule</h2>
+        <p>Clicking <strong>RanToAtlanta</strong> always refreshes the page (and stacks a little brand IQ).</p>
+        <p><a class="ask-btn" href="./">Back to lyrics</a></p>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-bottom" style="border:0;margin:0;max-width:900px">
+        <span>© 2026 RanToAtlanta brand kit</span>
+        <a href="./">Home</a>
+      </div>
+    </footer>
+
+    <script src="assets/js/points.js"></script>
+    <script>
+      document.getElementById("brand-logo")?.addEventListener("click", (e) => {
+        e.preventDefault();
+        window.RTAPoints?.earn("brand");
+        window.location.href = "./";
+        setTimeout(() => window.location.reload(), 10);
+      });
+    </script>
+  </body>
+</html>
