@@ -94,17 +94,19 @@
     const now = Date.now();
     const elapsed = Math.max(0, now - (state.lastTick || now));
     // ~1 pt every 2.2s while tab open, plus tiny catch-up
-    const passive = Math.min(40, Math.floor(elapsed / 2200) + 1);
+    const passive = Math.min(12, Math.floor(elapsed / 2200) + 1);
     state.points += passive;
     state.lastTick = now;
     save(state);
 
-    // Community board drift
+    // Community board: climb from launch epoch, stay human-scale
+    const launch = Date.UTC(2026, 7, 8, 14, 0, 0); // Aug 8 2026 launch window
+    const mins = Math.max(0, Math.floor((now - launch) / 60000));
     const board = BOTS.map((b, i) => {
-      const drift = Math.floor((now / 1000 + i * 17) % 90);
+      const pulse = Math.floor((now / 1800 + i * 13) % 40);
       return {
         name: b.name,
-        points: b.base + Math.floor(now / 4000) + drift * (i + 3),
+        points: b.base + mins * (3 + i) + pulse * (i + 2),
         bot: true,
       };
     });

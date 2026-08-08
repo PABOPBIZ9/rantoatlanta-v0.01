@@ -281,7 +281,37 @@
   const postBtn = document.getElementById("comment-post");
 
   function loadComments() {
-    return JSON.parse(localStorage.getItem(COMM_KEY) || "[]");
+    const items = JSON.parse(localStorage.getItem(COMM_KEY) || "[]");
+    if (items.length) return items;
+    // Launch seed so social never looks empty
+    const seed = [
+      {
+        id: "c_seed_1",
+        name: "BounceQueenATL",
+        when: "just now",
+        text: "Mannie Fresh chorus still hits different. Annotate a bar and climb 🔥",
+        score: 24,
+        replies: [],
+      },
+      {
+        id: "c_seed_2",
+        name: "WayneBars97",
+        when: "2m ago",
+        text: "That camouflaged AK line — drop knowledge, stack IQ, don't sleep.",
+        score: 18,
+        replies: [],
+      },
+      {
+        id: "c_seed_3",
+        name: "MagnoliaMike",
+        when: "5m ago",
+        text: "Live board is moving. Join +200 and get on it.",
+        score: 11,
+        replies: [],
+      },
+    ];
+    localStorage.setItem(COMM_KEY, JSON.stringify(seed));
+    return seed;
   }
   function saveComments(items) {
     localStorage.setItem(COMM_KEY, JSON.stringify(items.slice(0, 80)));
@@ -541,11 +571,11 @@
   });
 
   // —— Search ——
-  const search = document.getElementById("search");
-  let searched = false;
-  if (search) {
-    search.addEventListener("input", () => {
-      const q = search.value.trim().toLowerCase();
+  function wireSearch(el) {
+    if (!el) return;
+    let searched = false;
+    el.addEventListener("input", () => {
+      const q = el.value.trim().toLowerCase();
       document.querySelectorAll(".lyrics .line").forEach((line) => {
         if (!q) {
           line.style.opacity = "1";
@@ -560,6 +590,25 @@
       }
     });
   }
+  wireSearch(document.getElementById("search"));
+  wireSearch(document.getElementById("search-mobile"));
+
+  // Copy launch link
+  document.getElementById("copy-link")?.addEventListener("click", async () => {
+    const url = window.location.href.split("#")[0];
+    try {
+      await navigator.clipboard.writeText(url);
+      P.earn("share");
+      const btn = document.getElementById("copy-link");
+      if (btn) {
+        btn.textContent = "Copied!";
+        setTimeout(() => (btn.textContent = "Copy link · +50"), 1200);
+      }
+    } catch {
+      P.earn("share");
+      prompt("Copy link:", url);
+    }
+  });
 
   // Viewer count
   const viewers = document.getElementById("viewer-count");
