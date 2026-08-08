@@ -43,6 +43,8 @@
   const hudPoints = document.getElementById("hud-points");
   const hudRank = document.getElementById("hud-rank");
   const hudPulse = document.getElementById("hud-pulse");
+  const hudLevel = document.getElementById("hud-level");
+  const hudOnline = document.getElementById("hud-online");
   const boardEl = document.getElementById("leaderboard");
   const feedEl = document.getElementById("live-feed");
   const toastEl = document.getElementById("points-toast");
@@ -55,9 +57,46 @@
     toastEl._t = setTimeout(() => toastEl.classList.remove("show"), 1400);
   }
 
+  // Daily streak on load
+  const check = P.checkIn();
+  if (!check.already && check.amount) {
+    setTimeout(() => toast(check.amount, `day ${check.streak} streak`), 600);
+  }
+
+  function renderProfile(state, level) {
+    const el = document.getElementById("profile-card");
+    if (!el) return;
+    const a = state.actions || {};
+    el.innerHTML = `
+      <div class="profile-top">
+        <div class="badge">${level.badge}</div>
+        <div>
+          <strong>${escapeHtml(state.name)}</strong>
+          <div class="muted">${escapeHtml(level.title)} · ${state.streak || 0}-day streak</div>
+        </div>
+      </div>
+      <div class="level-bar"><i style="width:${Math.round((level.progress || 0) * 100)}%"></i></div>
+      <p class="muted" style="margin:.45rem 0 .75rem">
+        ${
+          level.next
+            ? `${P.format(level.next.min - state.points)} IQ to ${level.next.title}`
+            : "Max rank unlocked"
+        }
+      </p>
+      <div class="rewards-grid profile-stats">
+        <div><strong>${P.format(state.points)}</strong> IQ</div>
+        <div><strong>${a.annotate || 0}</strong> notes</div>
+        <div><strong>${a.comment || 0}</strong> posts</div>
+        <div><strong>${a.share || 0}</strong> shares</div>
+        <div><strong>${a.upvote || 0}</strong> upvotes</div>
+        <div><strong>${a.dm || 0}</strong> DMs</div>
+      </div>`;
+  }
+
   function renderHud(detail) {
     const state = detail?.state || P.load();
     const board = detail?.board || P.getBoard();
+    const level = detail?.level || P.levelFor(state.points);
     if (hudPoints) {
       hudPoints.textContent = P.format(state.points);
       hudPoints.classList.add("bump");
@@ -67,9 +106,14 @@
       const rank = board.findIndex((b) => b.you) + 1;
       hudRank.textContent = rank > 0 ? `#${rank}` : "—";
     }
+    if (hudLevel) hudLevel.textContent = level.title;
+    if (hudOnline) hudOnline.textContent = `${P.format(detail?.online || P.onlineNow())} online`;
     if (hudPulse && detail?.passive) {
       hudPulse.textContent = `+${detail.passive} live`;
     }
+    renderProfile(state, level);
+    const streakEl = document.getElementById("streak-count");
+    if (streakEl) streakEl.textContent = String(state.streak || 0);
     if (boardEl) {
       boardEl.innerHTML = board
         .slice(0, 8)
@@ -99,6 +143,9 @@
         search: "searched",
         play: "hit play",
         brand: "refreshed brand",
+        streak: "claimed daily streak",
+        quote: "shared a bar",
+        track: "opened a track",
       };
       feedEl.innerHTML = feed.length
         ? feed
@@ -253,6 +300,48 @@
     renderAnnList();
     markAnnotatedLines();
   });
+
+  // Share selected lyric as quote
+  document.getElementById("annotate-quote")?.addEventListener("click", async () => {
+    const line = panelLine?.textContent?.trim();
+    if (!line || line === "Select a lyric line") return;
+    const text = `"${line}" — Hot Boys · Shots Set's It Off\n${window.location.href.split("#")[0]}`;
+    try {
+      await navigator.clipboard.writeText(text);
+    } catch {
+      prompt("Copy quote:", text);
+    }
+    P.earn("quote");
+    toast(P.REWARDS.quote, "quote");
+  });
+
+  // Seed a couple annotations once
+  (function seedAnns() {
+    const data = loadAnns();
+    if (Object.keys(data).length) return;
+    const lines = document.querySelectorAll(".lyrics .line");
+    if (lines.length < 10) return;
+    const targets = [lines[5], lines[12], lines[20]].filter(Boolean);
+    targets.forEach((line, i) => {
+      const id = lineId(line);
+      data[id] = [
+        {
+          id: "seed_" + i,
+          who: ["HotBoyScholar", "BounceQueenATL", "WayneBars97"][i],
+          text: [
+            "This is the energy — Hot Boys announcing presence.",
+            "Classic Wayne imagery. Camouflage = surprise angle.",
+            "Mannie Fresh hypnotic loop — the whole bounce thesis.",
+          ][i],
+          ups: 12 - i * 3,
+          pts: 100,
+          t: Date.now() - i * 60000,
+        },
+      ];
+    });
+    saveAnns(data);
+    markAnnotatedLines();
+  })();
 
   panelList?.addEventListener("click", (e) => {
     const up = e.target.closest("[data-ann-up]");
@@ -592,6 +681,21 @@
   }
   wireSearch(document.getElementById("search"));
   wireSearch(document.getElementById("search-mobile"));
+
+  // Track catalog taps
+  document.querySelectorAll("[data-track]").forEach((el) => {
+    el.addEventListener("click", () => {
+      P.earn("track");
+      toast(P.REWARDS.track, "track");
+    });
+  });
+
+  document.getElementById("streak-btn")?.addEventListener("click", () => {
+    const r = P.checkIn();
+    if (r.already) toast(0, "streak claimed");
+    else toast(r.amount, `day ${r.streak}`);
+    renderHud({});
+  });
 
   // Copy launch link
   document.getElementById("copy-link")?.addEventListener("click", async () => {

@@ -3,9 +3,9 @@
  * Points climb from every interaction + passive live tick.
  */
 (function (global) {
-  const STORE = "rta-points-v2";
-  const BOARD = "rta-board-v2";
-  const FEED = "rta-feed-v2";
+  const STORE = "rta-points-v3";
+  const BOARD = "rta-board-v3";
+  const FEED = "rta-feed-v3";
 
   const REWARDS = {
     click: 1,
@@ -23,7 +23,20 @@
     search: 3,
     play: 15,
     brand: 10,
+    streak: 88,
+    quote: 35,
+    track: 12,
   };
+
+  const LEVELS = [
+    { min: 0, title: "New Bounce", badge: "NB" },
+    { min: 200, title: "Block Runner", badge: "BR" },
+    { min: 500, title: "Porch Scholar", badge: "PS" },
+    { min: 1000, title: "Hot Boy", badge: "HB" },
+    { min: 2500, title: "Big Tymer", badge: "BT" },
+    { min: 5000, title: "Magnolia General", badge: "MG" },
+    { min: 10000, title: "Cash Money Legend", badge: "CM" },
+  ];
 
   const BOTS = [
     { name: "MagnoliaMike", base: 8420 },
@@ -36,9 +49,14 @@
     { name: "JuveCorner", base: 4510 },
   ];
 
+  function dayKey(d = new Date()) {
+    return d.toISOString().slice(0, 10);
+  }
+
   function load() {
     try {
-      return JSON.parse(localStorage.getItem(STORE) || "null") || defaultState();
+      const raw = localStorage.getItem(STORE) || localStorage.getItem("rta-points-v2");
+      return JSON.parse(raw || "null") || defaultState();
     } catch {
       return defaultState();
     }
@@ -52,6 +70,8 @@
       points: 88,
       joined: false,
       actions: {},
+      streak: 0,
+      lastCheckIn: "",
       lastTick: Date.now(),
       createdAt: Date.now(),
     };
@@ -61,10 +81,19 @@
     localStorage.setItem(STORE, JSON.stringify(state));
   }
 
+  function levelFor(points) {
+    let cur = LEVELS[0];
+    for (const lv of LEVELS) {
+      if (points >= lv.min) cur = lv;
+    }
+    const next = LEVELS.find((l) => l.min > cur.min) || null;
+    return { ...cur, next, progress: next ? (points - cur.min) / (next.min - cur.min) : 1 };
+  }
+
   function pushFeed(entry) {
     const items = JSON.parse(localStorage.getItem(FEED) || "[]");
     items.unshift({ ...entry, t: Date.now() });
-    localStorage.setItem(FEED, JSON.stringify(items.slice(0, 60)));
+    localStorage.setItem(FEED, JSON.stringify(items.slice(0, 80)));
   }
 
   function earn(action, meta = {}) {
@@ -82,10 +111,45 @@
     });
     global.dispatchEvent(
       new CustomEvent("rta:points", {
-        detail: { state, action, amount, meta },
+        detail: { state, action, amount, meta, level: levelFor(state.points) },
       })
     );
     return { state, amount };
+  }
+
+  function checkIn() {
+    const state = load();
+    const today = dayKey();
+    if (state.lastCheckIn === today) {
+      return { state, amount: 0, streak: state.streak || 0, already: true };
+    }
+    const yesterday = dayKey(new Date(Date.now() - 86400000));
+    state.streak = state.lastCheckIn === yesterday ? (state.streak || 0) + 1 : 1;
+    state.lastCheckIn = today;
+    save(state);
+    const bonus = REWARDS.streak + Math.min(120, (state.streak - 1) * 12);
+    state.points += bonus;
+    state.actions.streak = (state.actions.streak || 0) + 1;
+    save(state);
+    pushFeed({ who: state.name, action: "streak", amount: bonus, meta: { streak: state.streak } });
+    global.dispatchEvent(
+      new CustomEvent("rta:points", {
+        detail: {
+          state,
+          action: "streak",
+          amount: bonus,
+          meta: { streak: state.streak },
+          level: levelFor(state.points),
+        },
+      })
+    );
+    return { state, amount: bonus, streak: state.streak, already: false };
+  }
+
+  function onlineNow() {
+    const now = Date.now();
+    // Fake-but-fun online pulse between ~180–420
+    return 180 + Math.floor((Math.sin(now / 7000) + 1) * 90) + Math.floor((now / 5000) % 40);
   }
 
   /** Passive FOMO: your score + community board always climb */
@@ -93,14 +157,12 @@
     const state = load();
     const now = Date.now();
     const elapsed = Math.max(0, now - (state.lastTick || now));
-    // ~1 pt every 2.2s while tab open, plus tiny catch-up
     const passive = Math.min(12, Math.floor(elapsed / 2200) + 1);
     state.points += passive;
     state.lastTick = now;
     save(state);
 
-    // Community board: climb from launch epoch, stay human-scale
-    const launch = Date.UTC(2026, 7, 8, 14, 0, 0); // Aug 8 2026 launch window
+    const launch = Date.UTC(2026, 7, 8, 14, 0, 0);
     const mins = Math.max(0, Math.floor((now - launch) / 60000));
     const board = BOTS.map((b, i) => {
       const pulse = Math.floor((now / 1800 + i * 13) % 40);
@@ -116,7 +178,13 @@
 
     global.dispatchEvent(
       new CustomEvent("rta:tick", {
-        detail: { state, board, passive },
+        detail: {
+          state,
+          board,
+          passive,
+          level: levelFor(state.points),
+          online: onlineNow(),
+        },
       })
     );
     return { state, board, passive };
@@ -154,6 +222,7 @@
 
   global.RTAPoints = {
     REWARDS,
+    LEVELS,
     load,
     save,
     earn,
@@ -162,6 +231,9 @@
     getFeed,
     setName,
     join,
+    checkIn,
+    levelFor,
+    onlineNow,
     format,
   };
 })(window);

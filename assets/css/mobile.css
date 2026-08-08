@@ -547,7 +547,8 @@ button {
 
   .rewards-grid,
   .drop-map,
-  .tracklist {
+  .tracklist,
+  .track-grid {
     grid-template-columns: 1fr 1fr;
   }
 
@@ -636,6 +637,10 @@ button {
   }
 
   .rewards-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .track-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 

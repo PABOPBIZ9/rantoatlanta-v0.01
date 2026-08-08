@@ -31,8 +31,8 @@
     <link rel="apple-touch-icon" href="brand/favicon/apple-touch-180.jpg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="stylesheet" href="assets/css/site.css?v=3" />
-    <link rel="stylesheet" href="assets/css/mobile.css?v=3" />
+    <link rel="stylesheet" href="assets/css/site.css?v=4" />
+    <link rel="stylesheet" href="assets/css/mobile.css?v=4" />
   </head>
   <body>
     <a class="skip" href="#lyrics">Skip to lyrics</a>
@@ -41,12 +41,13 @@
       <div class="hud-left">
         <span class="stat">IQ <em id="hud-points">88</em></span>
         <span class="stat">Rank <em id="hud-rank">#—</em></span>
+        <span class="stat hud-hide-sm">Lvl <em id="hud-level">New Bounce</em></span>
         <span class="pulse" id="hud-pulse">+1 live</span>
+        <span class="pulse" id="hud-online">200 online</span>
       </div>
       <div class="hud-right">
-        <a class="ghost hud-hide-sm" href="#board">Board</a>
+        <a class="ghost hud-hide-sm" href="#profile">Profile</a>
         <button type="button" class="ghost" id="open-dms">DMs</button>
-        <a class="ghost hud-hide-sm" href="brand.html">Brand</a>
         <a class="ghost" href="#signup">Join</a>
       </div>
     </div>
@@ -66,7 +67,8 @@
         <div class="nav-links" id="nav-links">
           <a href="#lyrics">Lyrics</a>
           <a href="#board">Board</a>
-          <a href="#about">About</a>
+          <a href="#tracks">Tracks</a>
+          <a href="#profile">Profile</a>
           <a href="#video">Video</a>
           <a href="#comments">Social</a>
           <a href="brand.html">Brand</a>
@@ -326,6 +328,14 @@
               <h3>Live feed</h3>
               <ul id="live-feed"></ul>
             </div>
+            <div class="panel-card" id="profile">
+              <h3>Your profile</h3>
+              <p class="hint">Streaks, rank, and every move that stacked IQ.</p>
+              <div id="profile-card"></div>
+              <button type="button" class="ask-btn" id="streak-btn" style="margin-top:0.75rem;width:100%">
+                Daily streak · <span id="streak-count">0</span> days · +88
+              </button>
+            </div>
             <div class="ad-card">
               <div class="eyebrow">From RanToAtlanta</div>
               <h3>50 shots. One bounce capital.</h3>
@@ -334,6 +344,45 @@
             </div>
           </div>
         </aside>
+      </section>
+
+      <section class="band" id="tracks">
+        <div class="band-inner">
+          <h2>More Hot Boys cuts</h2>
+          <p>Browse the catalog — each tap stacks +12 IQ while we cook full lyric pages.</p>
+          <div class="track-grid">
+            <button type="button" class="track-card" data-track="we-on-fire">
+              <img src="assets/img/cover.jpg" alt="" />
+              <strong>We On Fire</strong>
+              <span>Track 2 · Get It How U Live!!</span>
+            </button>
+            <button type="button" class="track-card current" data-track="shots">
+              <img src="assets/img/cover.jpg" alt="" />
+              <strong>Shots Set’s It Off</strong>
+              <span>Track 3 · playing now</span>
+            </button>
+            <button type="button" class="track-card" data-track="neighborhood">
+              <img src="assets/img/cover.jpg" alt="" />
+              <strong>Neighborhood Superstar</strong>
+              <span>Track 6 · B.G. &amp; Juvenile</span>
+            </button>
+            <button type="button" class="track-card" data-track="im-a-hot-boy">
+              <img src="assets/img/cover.jpg" alt="" />
+              <strong>I'm a Hot Boy</strong>
+              <span>Track 9 · anthem</span>
+            </button>
+            <button type="button" class="track-card" data-track="get-it">
+              <img src="assets/img/cover.jpg" alt="" />
+              <strong>Get It How U Live!!</strong>
+              <span>Track 10 · title cut</span>
+            </button>
+            <button type="button" class="track-card" data-track="block-burner">
+              <img src="assets/img/cover.jpg" alt="" />
+              <strong>Block Burner</strong>
+              <span>Track 5 · heat</span>
+            </button>
+          </div>
+        </div>
       </section>
 
       <section class="band" id="about">
@@ -482,8 +531,8 @@
             <div><strong>+50</strong> share / embed</div>
             <div><strong>+75</strong> repost</div>
             <div><strong>+100</strong> annotate a line</div>
-            <div><strong>+5</strong> upvote</div>
-            <div><strong>+30</strong> DM</div>
+            <div><strong>+88</strong> daily streak</div>
+            <div><strong>+35</strong> share a bar</div>
           </div>
         </div>
       </section>
@@ -517,6 +566,7 @@
       <textarea id="annotate-body" placeholder="Drop knowledge on this line…"></textarea>
       <div class="actions">
         <button type="button" id="annotate-save">Save note · +100</button>
+        <button type="button" class="secondary" id="annotate-quote">Share bar · +35</button>
       </div>
       <div class="ann-list" id="annotate-list"></div>
     </aside>
@@ -540,9 +590,9 @@
 
     <nav class="mobile-dock" aria-label="Mobile">
       <a href="#lyrics"><span class="ico">≡</span>Lyrics</a>
-      <a href="#board"><span class="ico">▲</span>Board</a>
+      <a href="#tracks"><span class="ico">♪</span>Tracks</a>
       <a href="#video"><span class="ico">▶</span>Play</a>
-      <button type="button" id="dock-dm"><span class="ico">✉</span>DMs</button>
+      <a href="#profile"><span class="ico">◆</span>You</a>
       <a href="#signup"><span class="ico">★</span>Join</a>
     </nav>
 
@@ -584,7 +634,7 @@
       </div>
     </footer>
 
-    <script src="assets/js/points.js?v=3"></script>
-    <script src="assets/js/site.js?v=3"></script>
+    <script src="assets/js/points.js?v=4"></script>
+    <script src="assets/js/site.js?v=4"></script>
   </body>
 </html>
