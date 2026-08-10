@@ -15,6 +15,18 @@
   ],
   "tracks": [
     {
+      "id": "rta-demo-tone",
+      "title": "RTA Demo Tone",
+      "artist": "RanToAtlanta",
+      "album": "On-site player test",
+      "cover": "assets/img/cover.jpg",
+      "audio": "media/embeds/audio/rta-demo-tone.wav",
+      "video": "",
+      "clip": "",
+      "fallbackEmbed": "",
+      "note": "Bundled demo so Studio plays without YouTube. Replace with real masters."
+    },
+    {
       "id": "shots-sets-it-off",
       "title": "Shots Set’s It Off",
       "artist": "Hot Boys",

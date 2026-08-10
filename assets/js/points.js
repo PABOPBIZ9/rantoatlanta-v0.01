@@ -35,6 +35,8 @@
     banner: 4,
     market: 22,
     profile: 18,
+    follow: 25,
+    notif: 2,
   };
 
   const LEVELS = [

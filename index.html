@@ -31,8 +31,8 @@
     <link rel="apple-touch-icon" href="brand/favicon/apple-touch-180.jpg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="stylesheet" href="assets/css/site.css?v=5" />
-    <link rel="stylesheet" href="assets/css/mobile.css?v=5" />
+    <link rel="stylesheet" href="assets/css/site.css?v=6" />
+    <link rel="stylesheet" href="assets/css/mobile.css?v=6" />
   </head>
   <body>
     <a class="skip" href="#lyrics">Skip to lyrics</a>
@@ -46,7 +46,14 @@
         <span class="pulse" id="hud-online">200 online</span>
       </div>
       <div class="hud-right">
-        <a class="ghost hud-hide-sm" href="profile.html">Profile</a>
+        <div class="notif-wrap">
+          <button type="button" class="ghost" id="notif-btn" aria-label="Notifications">
+            Alerts
+            <span id="notif-count" hidden>0</span>
+          </button>
+          <div id="notif-panel"><ul id="notif-list"></ul></div>
+        </div>
+        <a class="ghost" href="feed.html">FYP</a>
         <a class="ghost" href="#wallet">Wallet</a>
         <a class="ghost" href="#signup">Join</a>
       </div>
@@ -69,8 +76,10 @@
         <div class="nav-links" id="nav-links">
           <a href="#lyrics">Lyrics</a>
           <a href="#studio">Studio</a>
+          <a href="feed.html">For You</a>
           <a href="#wallet">Wallet</a>
           <a href="#live">Live</a>
+          <a href="#social-follow">Follow</a>
           <a href="#markets">Markets</a>
           <a href="#board">Board</a>
           <a href="profile.html">Profile</a>
@@ -525,6 +534,13 @@
         </div>
       </section>
 
+      <section class="comments" id="social-follow">
+        <h2>Follow creators</h2>
+        <p class="muted">IG / TikTok energy — follow to fill your alerts and stack +25 IQ each.</p>
+        <div class="follow-rail" id="follow-rail"></div>
+        <p style="margin-top:1rem"><a class="ask-btn" href="feed.html">Open For You feed</a></p>
+      </section>
+
       <section class="comments" id="wallet">
         <h2>Wallet · tip · farm · spend</h2>
         <p class="muted">Cash App energy meets bounce — tip bars, subscribe, farm while live, refer friends.</p>
@@ -680,12 +696,24 @@
 
     <div id="points-toast" role="status"></div>
 
+    <div class="mini-player" id="mini-player" hidden>
+      <img id="mini-cover" src="assets/img/cover.jpg" alt="" />
+      <div class="mini-meta">
+        <strong id="mini-title">Ready to play</strong>
+        <span class="muted" style="color:#bbb;font-size:0.72rem">On-site · never leave</span>
+      </div>
+      <button type="button" id="mini-toggle" aria-label="Play pause">▶</button>
+      <button type="button" id="mini-open" aria-label="Open studio">Studio</button>
+    </div>
+
+    <div id="celebrate" aria-hidden="true"></div>
+
     <nav class="mobile-dock" aria-label="Mobile">
       <a href="#lyrics"><span class="ico">≡</span>Lyrics</a>
+      <a href="feed.html"><span class="ico">♪</span>FYP</a>
       <a href="#studio"><span class="ico">▶</span>Studio</a>
       <a href="#wallet"><span class="ico">$</span>Wallet</a>
       <a href="profile.html"><span class="ico">◆</span>You</a>
-      <a href="#live"><span class="ico">●</span>Live</a>
     </nav>
 
     <footer class="footer">
@@ -726,10 +754,11 @@
       </div>
     </footer>
 
-    <script src="assets/js/points.js?v=5"></script>
-    <script src="assets/js/wallet.js?v=5"></script>
-    <script src="assets/js/media.js?v=5"></script>
-    <script src="assets/js/site.js?v=5"></script>
+    <script src="assets/js/points.js?v=6"></script>
+    <script src="assets/js/wallet.js?v=6"></script>
+    <script src="assets/js/social.js?v=6"></script>
+    <script src="assets/js/media.js?v=6"></script>
+    <script src="assets/js/site.js?v=6"></script>
     <script>
       document.querySelectorAll("[data-market]").forEach((el) => {
         el.addEventListener("click", () => {

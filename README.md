@@ -8,13 +8,13 @@ Genius-inspired bounce lyrics archive for **Hot Boys — Shots Set’s It Off**,
 
 ## Features
 
-- **On-site Studio** — audio/video/clips from `media/embeds/` (no leave-to-YouTube)
-- Genius-style lyric annotations + contributor **profile.html**
-- Wallet: tip · farm · subscribe · refer · go live · bounce markets
-- Reddit-style comments / upvotes / DMs / repost
-- Sticky IQ + cash HUD, streaks, levels, live leaderboard
-- Marketing banner rail from `brand/promo/banners/`
-- Logo click refreshes the page
+- **On-site Studio** + sticky mini-player (demo tone included)
+- **For You** feed (`feed.html`) — Douyin/TikTok-style vertical clips
+- Follow creators + live alerts bell
+- Genius-style annotations + **profile.html**
+- Wallet: tip · farm · subscribe · refer · go live · markets
+- Tip celebration + FOMO notifications
+- Auth/tip scaffold: `.env.example` (Dynamic / Supabase / Stripe / Mux)
 
 ## Drop media (important)
 

@@ -17,8 +17,14 @@
   async function probe(url) {
     if (!url) return false;
     try {
-      const res = await fetch(url, { method: "HEAD", cache: "no-store" });
-      return res.ok;
+      const head = await fetch(url, { method: "HEAD", cache: "no-store" });
+      if (head.ok) return true;
+    } catch {
+      /* fall through */
+    }
+    try {
+      const res = await fetch(url, { method: "GET", cache: "no-store", headers: { Range: "bytes=0-1" } });
+      return res.ok || res.status === 206;
     } catch {
       return false;
     }
@@ -54,7 +60,24 @@
     if (el) el.textContent = msg;
   }
 
+  function showMini(track, playing) {
+    const mini = document.getElementById("mini-player");
+    const mt = document.getElementById("mini-title");
+    const mc = document.getElementById("mini-cover");
+    const mb = document.getElementById("mini-toggle");
+    if (!mini) return;
+    mini.hidden = false;
+    document.body.classList.add("has-mini");
+    if (mt) mt.textContent = `${track.title} · ${track.artist}`;
+    if (mc) mc.src = track.cover || "assets/img/cover.jpg";
+    if (mb) mb.textContent = playing ? "❚❚" : "▶";
+  }
+
+  let currentTrack = null;
+  let activeEl = null;
+
   async function playTrack(track, mode = "auto") {
+    currentTrack = track;
     const audio = document.getElementById("studio-audio");
     const video = document.getElementById("studio-video");
     const iframe = document.getElementById("studio-fallback");
@@ -70,16 +93,19 @@
       if (el.pause) el.pause();
       if (el.tagName === "IFRAME") el.src = "";
     });
+    activeEl = null;
 
-    const hasVideo = mode !== "audio" && (await probe(track.video));
-    const hasAudio = await probe(track.audio);
-    const hasClip = mode === "clip" && (await probe(track.clip));
+    const hasVideo = mode !== "audio" && track.video && (await probe(track.video));
+    const hasAudio = track.audio && (await probe(track.audio));
+    const hasClip = mode === "clip" && track.clip && (await probe(track.clip));
 
     if (hasClip && video) {
       video.src = track.clip;
       video.hidden = false;
       video.play().catch(() => {});
+      activeEl = video;
       setStatus("Playing on-site clip · users stay here");
+      showMini(track, true);
       P()?.earn("play");
       return;
     }
@@ -88,7 +114,9 @@
       video.src = track.video;
       video.hidden = false;
       video.play().catch(() => {});
+      activeEl = video;
       setStatus("Playing on-site video embed");
+      showMini(track, true);
       P()?.earn("watch");
       return;
     }
@@ -97,7 +125,9 @@
       audio.src = track.audio;
       audio.hidden = false;
       audio.play().catch(() => {});
+      activeEl = audio;
       setStatus("Playing on-site audio · drop mp4 for full visual");
+      showMini(track, true);
       P()?.earn("play");
       return;
     }
@@ -107,11 +137,27 @@
       iframe.src = track.fallbackEmbed;
       iframe.hidden = false;
       setStatus("In-page embed (fallback). Drop mp3/mp4 into media/embeds/ to go fully native.");
+      showMini(track, true);
       P()?.earn("watch");
       return;
     }
 
     setStatus(`Drop files → ${track.audio || track.video} then hit Play`);
+    showMini(track, false);
+  }
+
+  function toggleMini() {
+    if (!activeEl) {
+      if (currentTrack) playTrack(currentTrack);
+      return;
+    }
+    if (activeEl.paused) {
+      activeEl.play().catch(() => {});
+      showMini(currentTrack, true);
+    } else {
+      activeEl.pause();
+      showMini(currentTrack, false);
+    }
   }
 
   function wireStudio(manifest) {
@@ -143,30 +189,23 @@
       playTrack(current);
     });
 
+    current = manifest.tracks?.[0];
+    currentTrack = current;
+
     document.getElementById("studio-play")?.addEventListener("click", () => {
       if (current) playTrack(current);
     });
     document.getElementById("studio-audio-only")?.addEventListener("click", () => {
       if (current) playTrack(current, "audio");
     });
+    document.getElementById("mini-toggle")?.addEventListener("click", toggleMini);
+    document.getElementById("mini-open")?.addEventListener("click", () => {
+      document.getElementById("studio")?.scrollIntoView({ behavior: "smooth" });
+    });
 
-    // Replace old youtube section behavior: auto-bind first track preview on observe
     if (current) {
-      const stage = document.getElementById("studio");
-      if (stage && "IntersectionObserver" in window) {
-        let once = false;
-        const io = new IntersectionObserver(
-          (entries) => {
-            if (entries.some((en) => en.isIntersecting) && !once) {
-              once = true;
-              // Don't autoplay with sound; just ready the UI
-              setStatus("Ready · Play keeps you on RanToAtlanta");
-            }
-          },
-          { threshold: 0.3 }
-        );
-        io.observe(stage);
-      }
+      setStatus("Ready · Demo tone plays on-site. Drop real masters anytime.");
+      showMini(current, false);
     }
   }
 
@@ -174,7 +213,7 @@
     const manifest = await loadManifest();
     renderBanners(manifest.banners);
     wireStudio(manifest);
-    global.RTAMedia = { manifest, playTrack, loadManifest };
+    global.RTAMedia = { manifest, playTrack, loadManifest, toggleMini };
   }
 
   if (document.readyState === "loading") {

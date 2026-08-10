@@ -1642,6 +1642,217 @@ input {
   }
 }
 
+/* Mini player + social + celebrate */
+.mini-player {
+  position: fixed;
+  left: 0.75rem;
+  right: 0.75rem;
+  bottom: calc(72px + env(safe-area-inset-bottom, 0px));
+  z-index: 47;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.45rem 0.65rem;
+  background: rgba(17, 17, 17, 0.94);
+  color: #fff;
+  border: 1px solid rgba(255, 138, 31, 0.55);
+  border-radius: 14px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+}
+
+.mini-player[hidden] {
+  display: none !important;
+}
+
+.mini-player img {
+  width: 42px;
+  height: 42px;
+  border-radius: 6px;
+  object-fit: cover;
+}
+
+.mini-player .mini-meta {
+  flex: 1;
+  min-width: 0;
+}
+
+.mini-player .mini-meta strong {
+  display: block;
+  font-size: 0.85rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mini-player button,
+.mini-player a {
+  border: 0;
+  background: var(--rta-ember);
+  color: #fff;
+  border-radius: 999px;
+  min-width: 40px;
+  min-height: 40px;
+  font-weight: 800;
+  cursor: pointer;
+  text-decoration: none;
+  display: grid;
+  place-items: center;
+  padding: 0 0.7rem;
+}
+
+body.has-mini {
+  padding-bottom: calc(72px + 64px + env(safe-area-inset-bottom, 0px));
+}
+
+.follow-rail {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.follow-card {
+  display: grid;
+  grid-template-columns: 40px 1fr auto;
+  gap: 0.55rem;
+  align-items: center;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 0.55rem;
+}
+
+.follow-card .avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--rta-ember), var(--rta-gold));
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+}
+
+.follow-card span {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--rta-muted);
+}
+
+.follow-card button {
+  border: 1px solid #111;
+  background: #111;
+  color: #fff;
+  border-radius: 999px;
+  padding: 0.4rem 0.7rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  cursor: pointer;
+  min-height: 36px;
+}
+
+.follow-card button.on {
+  background: #fff;
+  color: #111;
+}
+
+.notif-wrap {
+  position: relative;
+}
+
+.notif-wrap button {
+  position: relative;
+}
+
+#notif-count {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background: var(--rta-ember);
+  color: #fff;
+  border-radius: 999px;
+  font-size: 0.65rem;
+  font-weight: 800;
+  min-width: 16px;
+  height: 16px;
+  display: grid;
+  place-items: center;
+}
+
+#notif-panel {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: calc(100% + 0.4rem);
+  width: min(300px, 80vw);
+  background: #fff;
+  color: #111;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2);
+  z-index: 60;
+  max-height: 280px;
+  overflow: auto;
+}
+
+#notif-panel.open {
+  display: block;
+}
+
+#notif-panel ul {
+  list-style: none;
+  margin: 0;
+  padding: 0.35rem;
+}
+
+#notif-panel li {
+  padding: 0.55rem;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 0.82rem;
+}
+
+#notif-panel li.unread {
+  background: #fff7e8;
+}
+
+#celebrate {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  overflow: hidden;
+  opacity: 0;
+}
+
+#celebrate.show {
+  opacity: 1;
+}
+
+#celebrate i {
+  position: absolute;
+  top: -10%;
+  font-style: normal;
+  font-size: 1.4rem;
+  animation: fall 1.4s linear forwards;
+  color: var(--rta-gold);
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(110vh) rotate(240deg);
+    opacity: 0.2;
+  }
+}
+
+@media (min-width: 900px) {
+  .mini-player {
+    left: auto;
+    right: 1rem;
+    bottom: 1rem;
+    width: min(380px, 40vw);
+  }
+
+  body.has-mini {
+    padding-bottom: 0;
+  }
+}
+
 @keyframes bump {
   50% {
     transform: scale(1.12);

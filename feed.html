@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#111111" />
+    <title>For You · RanToAtlanta</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="stylesheet" href="assets/css/site.css?v=6" />
+    <link rel="stylesheet" href="assets/css/mobile.css?v=6" />
+    <link rel="stylesheet" href="assets/css/feed.css?v=6" />
+  </head>
+  <body class="fyp-body">
+    <header class="fyp-top">
+      <a href="./" id="brand-logo">RanToAtlanta</a>
+      <span>For You</span>
+      <a href="profile.html">You</a>
+    </header>
+
+    <main class="fyp" id="fyp">
+      <!-- cards injected -->
+    </main>
+
+    <nav class="mobile-dock" aria-label="Mobile">
+      <a href="./#lyrics"><span class="ico">≡</span>Lyrics</a>
+      <a href="feed.html"><span class="ico">♪</span>FYP</a>
+      <a href="./#studio"><span class="ico">▶</span>Studio</a>
+      <a href="./#wallet"><span class="ico">$</span>Wallet</a>
+      <a href="profile.html"><span class="ico">◆</span>You</a>
+    </nav>
+
+    <div id="points-toast" role="status"></div>
+    <div id="celebrate" aria-hidden="true"></div>
+
+    <script src="assets/js/points.js?v=6"></script>
+    <script src="assets/js/wallet.js?v=6"></script>
+    <script src="assets/js/social.js?v=6"></script>
+    <script>
+      (function () {
+        const P = window.RTAPoints;
+        document.getElementById("brand-logo")?.addEventListener("click", (e) => {
+          e.preventDefault();
+          P.earn("brand");
+          location.href = "./";
+        });
+
+        const clips = [
+          {
+            title: "Shots Set’s It Off",
+            user: "HotBoys",
+            caption: "50 shots gon' set it off — annotate the bar",
+            cover: "assets/img/cover.jpg",
+            audio: "media/embeds/audio/rta-demo-tone.wav",
+          },
+          {
+            title: "Mannie Fresh loop",
+            user: "BounceQueenATL",
+            caption: "Chorus on repeat. Tip if it hits.",
+            cover: "assets/img/cover.jpg",
+            audio: "media/embeds/audio/rta-demo-tone.wav",
+          },
+          {
+            title: "Wayne bar energy",
+            user: "WayneBars97",
+            caption: "Camouflaged AK line still undefeated",
+            cover: "assets/img/cover.jpg",
+            audio: "media/embeds/audio/rta-demo-tone.wav",
+          },
+          {
+            title: "Go live farm",
+            user: "CashMoneyKid",
+            caption: "Flip live → passive cash while the room watches",
+            cover: "brand/promo/banners/stories/rta-story.svg",
+            audio: "media/embeds/audio/rta-demo-tone.wav",
+          },
+        ];
+
+        const root = document.getElementById("fyp");
+        root.innerHTML = clips
+          .map(
+            (c, i) => `
+          <article class="fyp-card" data-i="${i}">
+            <img class="fyp-bg" src="${c.cover}" alt="" />
+            <div class="fyp-shade"></div>
+            <div class="fyp-meta">
+              <strong>@${c.user}</strong>
+              <h2>${c.title}</h2>
+              <p>${c.caption}</p>
+              <audio preload="none" src="${c.audio}" loop></audio>
+            </div>
+            <div class="fyp-rail">
+              <button type="button" data-act="like">♥<span>Like</span></button>
+              <button type="button" data-act="comment">◉<span>Comment</span></button>
+              <button type="button" data-act="tip">$<span>Tip</span></button>
+              <button type="button" data-act="share">↗<span>Share</span></button>
+              <button type="button" data-act="follow">＋<span>Follow</span></button>
+            </div>
+          </article>`
+          )
+          .join("");
+
+        const toast = document.getElementById("points-toast");
+        function flash(msg) {
+          if (!toast) return;
+          toast.textContent = msg;
+          toast.classList.add("show");
+          setTimeout(() => toast.classList.remove("show"), 1200);
+        }
+
+        let activeAudio = null;
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((en) => {
+              const audio = en.target.querySelector("audio");
+              if (!audio) return;
+              if (en.isIntersecting && en.intersectionRatio > 0.65) {
+                if (activeAudio && activeAudio !== audio) {
+                  activeAudio.pause();
+                }
+                activeAudio = audio;
+                audio.play().catch(() => {});
+                P.earn("watch");
+              } else {
+                audio.pause();
+              }
+            });
+          },
+          { threshold: [0.65] }
+        );
+        root.querySelectorAll(".fyp-card").forEach((card) => io.observe(card));
+
+        root.addEventListener("click", (e) => {
+          const btn = e.target.closest("[data-act]");
+          if (!btn) return;
+          const act = btn.dataset.act;
+          if (act === "like") {
+            P.earn("upvote");
+            flash("+5 like");
+          } else if (act === "comment") {
+            P.earn("comment");
+            flash("+40 comment");
+          } else if (act === "tip") {
+            window.RTAWallet?.tip(1);
+            flash("tipped $1");
+          } else if (act === "share") {
+            P.earn("share");
+            flash("+50 share");
+          } else if (act === "follow") {
+            window.RTASocial?.follow("bounce-queen");
+            flash("+25 follow");
+            btn.textContent = "✓";
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>

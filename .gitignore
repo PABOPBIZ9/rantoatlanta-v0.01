@@ -4,3 +4,7 @@ node_modules/
 *.log
 reference/
 .cursor/
+.env
+.env.local
+.env.*.local
+*.pem

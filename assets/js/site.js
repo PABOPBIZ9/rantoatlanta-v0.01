@@ -155,6 +155,8 @@
         banner: "viewed a banner",
         market: "picked a market",
         profile: "viewed a profile",
+        follow: "followed a creator",
+        notif: "checked alerts",
       };
       feedEl.innerHTML = feed.length
         ? feed

@@ -1,0 +1,103 @@
+.fyp-body {
+  margin: 0;
+  background: #050505;
+  color: #fff;
+  padding-bottom: calc(72px + env(safe-area-inset-bottom, 0px));
+}
+
+.fyp-top {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(10px);
+  font-weight: 800;
+}
+
+.fyp-top a {
+  color: #fff;
+  text-decoration: none;
+  font-family: var(--rta-display), Impact, sans-serif;
+}
+
+.fyp {
+  height: calc(100dvh - 52px - 72px);
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+}
+
+.fyp-card {
+  position: relative;
+  height: calc(100dvh - 52px - 72px);
+  scroll-snap-align: start;
+  overflow: hidden;
+}
+
+.fyp-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(1.1);
+}
+
+.fyp-shade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(transparent 40%, rgba(0, 0, 0, 0.75) 100%);
+}
+
+.fyp-meta {
+  position: absolute;
+  left: 1rem;
+  right: 5rem;
+  bottom: 1.5rem;
+  z-index: 2;
+}
+
+.fyp-meta h2 {
+  margin: 0.25rem 0;
+  font-family: var(--rta-display), Impact, sans-serif;
+  font-size: 1.5rem;
+}
+
+.fyp-meta p {
+  margin: 0;
+  opacity: 0.92;
+}
+
+.fyp-rail {
+  position: absolute;
+  right: 0.55rem;
+  bottom: 5.5rem;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.fyp-rail button {
+  width: 52px;
+  min-height: 52px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.45);
+  color: #fff;
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+}
+
+.fyp-rail button span {
+  display: none;
+}
+
+.fyp-body .mobile-dock {
+  display: grid;
+}
