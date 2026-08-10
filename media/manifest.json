@@ -1,0 +1,52 @@
+{
+  "site": "RanToAtlanta",
+  "keepUsersOnSite": true,
+  "banners": [
+    {
+      "src": "brand/promo/banners/web/rta-hero-banner.svg",
+      "alt": "RanToAtlanta — Set it off",
+      "href": "#studio"
+    },
+    {
+      "src": "brand/promo/banners/stories/rta-story.svg",
+      "alt": "Go live · tip · farm",
+      "href": "#live"
+    }
+  ],
+  "tracks": [
+    {
+      "id": "shots-sets-it-off",
+      "title": "Shots Set’s It Off",
+      "artist": "Hot Boys",
+      "album": "Get It How U Live!!",
+      "cover": "assets/img/cover.jpg",
+      "audio": "media/embeds/audio/shots-sets-it-off.mp3",
+      "video": "media/embeds/video/shots-sets-it-off.mp4",
+      "clip": "media/embeds/clips/shots-hook-15s.mp4",
+      "fallbackEmbed": "https://www.youtube-nocookie.com/embed/R91YqwBoym4",
+      "note": "Drop local mp3/mp4 into media/embeds to replace fallback"
+    },
+    {
+      "id": "we-on-fire",
+      "title": "We On Fire",
+      "artist": "Hot Boys",
+      "album": "Get It How U Live!!",
+      "cover": "assets/img/cover.jpg",
+      "audio": "media/embeds/audio/we-on-fire.mp3",
+      "video": "media/embeds/video/we-on-fire.mp4",
+      "fallbackEmbed": "",
+      "note": "Drop file to unlock on-site play"
+    },
+    {
+      "id": "neighborhood-superstar",
+      "title": "Neighborhood Superstar",
+      "artist": "Hot Boys",
+      "album": "Get It How U Live!!",
+      "cover": "assets/img/cover.jpg",
+      "audio": "media/embeds/audio/neighborhood-superstar.mp3",
+      "video": "media/embeds/video/neighborhood-superstar.mp4",
+      "fallbackEmbed": "",
+      "note": "Drop file to unlock on-site play"
+    }
+  ]
+}

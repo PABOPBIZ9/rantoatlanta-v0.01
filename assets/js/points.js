@@ -3,9 +3,9 @@
  * Points climb from every interaction + passive live tick.
  */
 (function (global) {
-  const STORE = "rta-points-v3";
-  const BOARD = "rta-board-v3";
-  const FEED = "rta-feed-v3";
+  const STORE = "rta-points-v4";
+  const BOARD = "rta-board-v4";
+  const FEED = "rta-feed-v4";
 
   const REWARDS = {
     click: 1,
@@ -26,6 +26,15 @@
     streak: 88,
     quote: 35,
     track: 12,
+    tip: 60,
+    subscribe: 250,
+    farm: 8,
+    spend: 40,
+    refer: 150,
+    live: 120,
+    banner: 4,
+    market: 22,
+    profile: 18,
   };
 
   const LEVELS = [
@@ -55,7 +64,10 @@
 
   function load() {
     try {
-      const raw = localStorage.getItem(STORE) || localStorage.getItem("rta-points-v2");
+      const raw =
+        localStorage.getItem(STORE) ||
+        localStorage.getItem("rta-points-v3") ||
+        localStorage.getItem("rta-points-v2");
       return JSON.parse(raw || "null") || defaultState();
     } catch {
       return defaultState();

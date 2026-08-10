@@ -146,6 +146,15 @@
         streak: "claimed daily streak",
         quote: "shared a bar",
         track: "opened a track",
+        tip: "tipped",
+        subscribe: "subscribed",
+        farm: "farmed",
+        spend: "spent",
+        refer: "referred a friend",
+        live: "went live",
+        banner: "viewed a banner",
+        market: "picked a market",
+        profile: "viewed a profile",
       };
       feedEl.innerHTML = feed.length
         ? feed

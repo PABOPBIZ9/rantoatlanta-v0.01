@@ -31,8 +31,8 @@
     <link rel="apple-touch-icon" href="brand/favicon/apple-touch-180.jpg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="stylesheet" href="assets/css/site.css?v=4" />
-    <link rel="stylesheet" href="assets/css/mobile.css?v=4" />
+    <link rel="stylesheet" href="assets/css/site.css?v=5" />
+    <link rel="stylesheet" href="assets/css/mobile.css?v=5" />
   </head>
   <body>
     <a class="skip" href="#lyrics">Skip to lyrics</a>
@@ -41,22 +41,24 @@
       <div class="hud-left">
         <span class="stat">IQ <em id="hud-points">88</em></span>
         <span class="stat">Rank <em id="hud-rank">#—</em></span>
-        <span class="stat hud-hide-sm">Lvl <em id="hud-level">New Bounce</em></span>
+        <span class="stat">Cash <em id="wallet-cash-hud">$25.00</em></span>
         <span class="pulse" id="hud-pulse">+1 live</span>
         <span class="pulse" id="hud-online">200 online</span>
       </div>
       <div class="hud-right">
-        <a class="ghost hud-hide-sm" href="#profile">Profile</a>
-        <button type="button" class="ghost" id="open-dms">DMs</button>
+        <a class="ghost hud-hide-sm" href="profile.html">Profile</a>
+        <a class="ghost" href="#wallet">Wallet</a>
         <a class="ghost" href="#signup">Join</a>
       </div>
     </div>
 
     <div class="ad-strip">
       <strong>RAN TO ATLANTA</strong>
-      <span>Annotate · upvote · share · stack IQ · points never sleep</span>
-      <a class="pill" href="#video">Play the cut</a>
+      <span>On-site play · tip · farm · go live · never leave the app</span>
+      <a class="pill" href="#studio">Play in-app</a>
     </div>
+
+    <section class="banner-rail" id="banner-rail" aria-label="Marketing banners"></section>
 
     <header class="site-header">
       <nav class="nav" aria-label="Primary">
@@ -66,10 +68,12 @@
         </button>
         <div class="nav-links" id="nav-links">
           <a href="#lyrics">Lyrics</a>
+          <a href="#studio">Studio</a>
+          <a href="#wallet">Wallet</a>
+          <a href="#live">Live</a>
+          <a href="#markets">Markets</a>
           <a href="#board">Board</a>
-          <a href="#tracks">Tracks</a>
-          <a href="#profile">Profile</a>
-          <a href="#video">Video</a>
+          <a href="profile.html">Profile</a>
           <a href="#comments">Social</a>
           <a href="brand.html">Brand</a>
           <a href="#signup">Join · +200</a>
@@ -335,6 +339,7 @@
               <button type="button" class="ask-btn" id="streak-btn" style="margin-top:0.75rem;width:100%">
                 Daily streak · <span id="streak-count">0</span> days · +88
               </button>
+              <p style="margin-top:0.65rem"><a href="profile.html">Open full Genius-style profile →</a></p>
             </div>
             <div class="ad-card">
               <div class="eyebrow">From RanToAtlanta</div>
@@ -477,22 +482,109 @@
         </div>
       </section>
 
-      <section class="band tan" id="video">
-        <div class="band-inner">
+      <section class="band tan" id="studio">
+        <div class="band-inner studio">
+          <h2>Studio · stay on-site</h2>
+          <p>Videos, audio, and clips play here. Drop HQ files into <code>media/embeds/</code> — we never send you away.</p>
           <div class="tags">
             <span>Rap</span>
-            <span>In English</span>
-            <span>USA</span>
             <span>Bounce</span>
+            <span>On-site</span>
+            <span>No leave</span>
           </div>
-          <div class="video-wrap">
-            <iframe
-              src="https://www.youtube-nocookie.com/embed/R91YqwBoym4"
-              title="Hot Boys - Shots Set’s It Off"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen
-              loading="lazy"
-            ></iframe>
+
+          <div class="studio-shell">
+            <div class="studio-stage">
+              <img id="studio-cover" src="assets/img/cover.jpg" alt="" />
+              <video id="studio-video" controls playsinline hidden></video>
+              <audio id="studio-audio" controls hidden></audio>
+              <iframe
+                id="studio-fallback"
+                title="In-page fallback embed"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+                loading="lazy"
+                hidden
+              ></iframe>
+            </div>
+            <div class="studio-meta">
+              <h3 id="studio-title">Shots Set’s It Off · Hot Boys</h3>
+              <p class="muted" id="studio-status">Ready · Play keeps you on RanToAtlanta</p>
+              <div class="studio-actions">
+                <button type="button" id="studio-play">Play · +15/+25</button>
+                <button type="button" class="secondary" id="studio-audio-only">Audio only</button>
+                <a class="ask-btn" href="#wallet" style="margin:0">Tip artist</a>
+              </div>
+              <div id="studio-tracklist" class="studio-tracklist"></div>
+              <p class="muted" style="margin-top:0.75rem;font-size:0.85rem">
+                Drop: <code>media/embeds/audio/*.mp3</code> · <code>media/embeds/video/*.mp4</code> ·
+                <code>media/embeds/clips/*.mp4</code> then refresh.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="comments" id="wallet">
+        <h2>Wallet · tip · farm · spend</h2>
+        <p class="muted">Cash App energy meets bounce — tip bars, subscribe, farm while live, refer friends.</p>
+        <div class="wallet-grid">
+          <div class="wallet-card">
+            <span class="label">Balance</span>
+            <strong id="wallet-cash">$25.00</strong>
+            <div class="wallet-actions">
+              <button type="button" id="btn-tip">Tip $1 · +60 IQ</button>
+              <button type="button" id="btn-tip-5">Tip $5</button>
+              <button type="button" class="secondary" id="btn-farm">Farm · +8 IQ</button>
+            </div>
+          </div>
+          <div class="wallet-card">
+            <span class="label">Farmed runs</span>
+            <strong id="wallet-farmed">0</strong>
+            <span class="label">Tipped out</span>
+            <strong id="wallet-tipped">$0.00</strong>
+          </div>
+          <div class="wallet-card">
+            <span class="label">Membership</span>
+            <strong id="sub-status">Not subscribed</strong>
+            <button type="button" id="btn-subscribe">Subscribe $4.99 · +250 IQ</button>
+          </div>
+          <div class="wallet-card">
+            <span class="label">Referrals</span>
+            <strong id="wallet-refs">0</strong>
+            <p class="muted">Code <strong id="refer-code">RTA----</strong></p>
+            <button type="button" id="btn-refer">Copy invite · +150 IQ</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="band" id="live">
+        <div class="band-inner">
+          <h2>Go Live</h2>
+          <p>Douyin / IG Live vibes — flip live to farm passive cash + IQ while the room watches.</p>
+          <p><strong id="live-status">Offline</strong></p>
+          <button type="button" class="ask-btn" id="btn-live" style="margin-top:0.75rem">Go Live · +120 IQ</button>
+          <p class="muted" style="margin-top:1rem">Drop replays into <code>live/replays/</code> for on-site playback.</p>
+        </div>
+      </section>
+
+      <section class="band tan" id="markets">
+        <div class="band-inner">
+          <h2>Bounce markets</h2>
+          <p>Polymarket × DraftKings energy — pick a side, stack IQ (demo odds).</p>
+          <div class="market-grid">
+            <button type="button" class="market-card" data-market="chorus">
+              <strong>Will the Mannie Fresh chorus get 50 annotations today?</strong>
+              <span>YES 62% · NO 38%</span>
+            </button>
+            <button type="button" class="market-card" data-market="wayne">
+              <strong>Wayne verse most upvoted bar this week?</strong>
+              <span>YES 71% · NO 29%</span>
+            </button>
+            <button type="button" class="market-card" data-market="live">
+              <strong>100+ users go live this weekend?</strong>
+              <span>YES 44% · NO 56%</span>
+            </button>
           </div>
         </div>
       </section>
@@ -590,10 +682,10 @@
 
     <nav class="mobile-dock" aria-label="Mobile">
       <a href="#lyrics"><span class="ico">≡</span>Lyrics</a>
-      <a href="#tracks"><span class="ico">♪</span>Tracks</a>
-      <a href="#video"><span class="ico">▶</span>Play</a>
-      <a href="#profile"><span class="ico">◆</span>You</a>
-      <a href="#signup"><span class="ico">★</span>Join</a>
+      <a href="#studio"><span class="ico">▶</span>Studio</a>
+      <a href="#wallet"><span class="ico">$</span>Wallet</a>
+      <a href="profile.html"><span class="ico">◆</span>You</a>
+      <a href="#live"><span class="ico">●</span>Live</a>
     </nav>
 
     <footer class="footer">
@@ -634,7 +726,17 @@
       </div>
     </footer>
 
-    <script src="assets/js/points.js?v=4"></script>
-    <script src="assets/js/site.js?v=4"></script>
+    <script src="assets/js/points.js?v=5"></script>
+    <script src="assets/js/wallet.js?v=5"></script>
+    <script src="assets/js/media.js?v=5"></script>
+    <script src="assets/js/site.js?v=5"></script>
+    <script>
+      document.querySelectorAll("[data-market]").forEach((el) => {
+        el.addEventListener("click", () => {
+          window.RTAPoints?.earn("market");
+          el.classList.add("picked");
+        });
+      });
+    </script>
   </body>
 </html>

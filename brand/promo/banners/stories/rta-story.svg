@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1920" viewBox="0 0 1080 1920">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#111"/>
+      <stop offset="55%" stop-color="#ff6a00"/>
+      <stop offset="100%" stop-color="#ffc53d"/>
+    </linearGradient>
+  </defs>
+  <rect width="1080" height="1920" fill="url(#g)"/>
+  <text x="80" y="820" font-family="Arial Black, Helvetica, sans-serif" font-size="110" fill="#fff">RAN TO</text>
+  <text x="80" y="960" font-family="Arial Black, Helvetica, sans-serif" font-size="110" fill="#fff">ATLANTA</text>
+  <text x="80" y="1100" font-family="Helvetica, Arial, sans-serif" font-size="48" fill="#111" font-weight="700">GO LIVE · TIP · FARM</text>
+</svg>
