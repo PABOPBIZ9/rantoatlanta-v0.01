@@ -1,0 +1,11 @@
+{
+  "title": "RanToAtlanta Early Supporters",
+  "note": "Add handles here — Community Card Studio loads them as one-tap chips.",
+  "supporters": [
+    { "handle": "@Cirrus", "note": "Reference style card" },
+    { "handle": "@BounceQueenATL", "note": "Founding annotator" },
+    { "handle": "@WayneBars97", "note": "OG bar dropper" },
+    { "handle": "@CashMoneyKid", "note": "Live farmer" },
+    { "handle": "@StunnaArchive", "note": "Birdman catalog" }
+  ]
+}

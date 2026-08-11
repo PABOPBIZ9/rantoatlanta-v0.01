@@ -1,0 +1,310 @@
+/* Community Card Studio — Pump.fun-style spotlight cards for RanToAtlanta */
+
+:root {
+  --cc-bg: #070f0c;
+  --cc-panel: #0f1c16;
+  --cc-line: rgba(255, 197, 61, 0.28);
+  --cc-gold: #ffc53d;
+  --cc-cream: #fff4d2;
+  --cc-text: #f4f7f2;
+  --cc-muted: rgba(244, 247, 242, 0.62);
+  --cc-display: "Archivo Black", Impact, sans-serif;
+  --cc-body: "IBM Plex Sans", system-ui, sans-serif;
+}
+
+.cc-body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(ellipse at 50% -10%, rgba(34, 92, 58, 0.45), transparent 55%),
+    linear-gradient(180deg, #0a1a12 0%, #050808 100%);
+  color: var(--cc-text);
+  font-family: var(--cc-body);
+}
+
+.cc-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.9rem max(1rem, 4vw);
+  border-bottom: 1px solid var(--cc-line);
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(10px);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.cc-top .brand {
+  font-family: var(--cc-display);
+  color: var(--cc-gold);
+  text-decoration: none;
+  letter-spacing: 0.02em;
+}
+
+.cc-top a {
+  color: var(--cc-cream);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.cc-top-label {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--cc-muted);
+}
+
+.cc-hero {
+  text-align: center;
+  padding: 2.4rem max(1rem, 4vw) 1.5rem;
+}
+
+.cc-hero .kicker {
+  margin: 0;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--cc-gold);
+}
+
+.cc-hero h1 {
+  font-family: var(--cc-display);
+  font-size: clamp(2.4rem, 7vw, 4rem);
+  margin: 0.45rem 0 0.6rem;
+  letter-spacing: 0.02em;
+  background: linear-gradient(180deg, #fff8e4 0%, #ffc53d 55%, #ff8a1f 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.cc-hero .lede {
+  max-width: 34rem;
+  margin: 0 auto;
+  color: var(--cc-muted);
+  line-height: 1.5;
+  font-size: 1rem;
+}
+
+.cc-hero .lede strong {
+  color: var(--cc-cream);
+}
+
+.cc-layout {
+  display: grid;
+  grid-template-columns: minmax(280px, 380px) minmax(0, 1fr);
+  gap: 1.5rem;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 max(1rem, 4vw) 3rem;
+}
+
+.cc-panel {
+  border: 1px solid var(--cc-line);
+  border-radius: 18px;
+  padding: 1.1rem 1.15rem 1.35rem;
+  background: linear-gradient(165deg, rgba(20, 40, 30, 0.95), rgba(8, 14, 12, 0.98));
+  display: grid;
+  gap: 0.85rem;
+  align-content: start;
+}
+
+.cc-field {
+  display: grid;
+  gap: 0.35rem;
+  margin: 0;
+  border: 0;
+  padding: 0;
+}
+
+.cc-field > span,
+.cc-field legend {
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--cc-muted);
+}
+
+.cc-field input[type="text"],
+.cc-field input[type="file"] {
+  width: 100%;
+  min-height: 44px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(0, 0, 0, 0.35);
+  color: var(--cc-text);
+  padding: 0.65rem 0.8rem;
+  font: inherit;
+}
+
+.cc-field input[type="file"] {
+  padding: 0.55rem;
+  font-size: 0.82rem;
+}
+
+.cc-seg {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.cc-seg button {
+  min-height: 40px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--cc-text);
+  padding: 0.4rem 0.75rem;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+}
+
+.cc-seg button.is-on {
+  background: linear-gradient(180deg, #ffc53d, #ff8a1f);
+  color: #111;
+  border-color: transparent;
+}
+
+.cc-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+}
+
+.cc-actions .primary,
+.cc-actions .ghost {
+  min-height: 48px;
+  border-radius: 999px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  border: 0;
+}
+
+.cc-actions .primary {
+  background: linear-gradient(180deg, #ffc53d, #ff8a1f);
+  color: #111;
+}
+
+.cc-actions .ghost {
+  background: transparent;
+  color: var(--cc-cream);
+  border: 1px solid var(--cc-line);
+}
+
+.cc-hint {
+  margin: 0;
+  font-size: 0.75rem;
+  color: var(--cc-muted);
+  line-height: 1.4;
+}
+
+.cc-hint code,
+.cc-hint kbd {
+  font-size: 0.72rem;
+  color: var(--cc-gold);
+}
+
+.cc-roster h2 {
+  font-family: var(--cc-display);
+  font-size: 1.05rem;
+  margin: 0.4rem 0 0.55rem;
+}
+
+.cc-roster-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.cc-roster-list button {
+  min-height: 36px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 197, 61, 0.25);
+  background: rgba(255, 197, 61, 0.08);
+  color: var(--cc-cream);
+  padding: 0.3rem 0.7rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.cc-roster-list button:hover {
+  border-color: var(--cc-gold);
+}
+
+.cc-stage {
+  display: grid;
+  justify-items: center;
+  align-content: start;
+  gap: 0.75rem;
+}
+
+#cc-canvas {
+  width: min(100%, 540px);
+  height: auto;
+  border-radius: 22px;
+  box-shadow: 0 28px 60px rgba(0, 0, 0, 0.55);
+  background: #000;
+}
+
+.cc-stage-note {
+  margin: 0;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--cc-muted);
+}
+
+.cc-ref {
+  width: min(100%, 360px);
+  color: var(--cc-muted);
+  font-size: 0.82rem;
+}
+
+.cc-ref summary {
+  cursor: pointer;
+  margin-bottom: 0.5rem;
+}
+
+.cc-ref img {
+  width: 100%;
+  border-radius: 14px;
+  border: 1px solid var(--cc-line);
+}
+
+.cc-foot {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.25rem;
+  justify-content: center;
+  padding: 1.25rem max(1rem, 4vw) calc(1.5rem + env(safe-area-inset-bottom));
+  border-top: 1px solid var(--cc-line);
+  color: var(--cc-muted);
+  font-size: 0.78rem;
+}
+
+.cc-foot a {
+  color: var(--cc-gold);
+  text-decoration: none;
+  font-weight: 700;
+}
+
+@media (max-width: 900px) {
+  .cc-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .cc-top-label {
+    display: none;
+  }
+}

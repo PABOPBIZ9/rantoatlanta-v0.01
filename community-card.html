@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta
+      name="description"
+      content="Community Card Studio — drop NFT/avatar + username, stamp RanToAtlanta, download share cards for early supporters."
+    />
+    <meta name="theme-color" content="#0a1a12" />
+    <title>Community Card Studio · RanToAtlanta</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Sans:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/site.css?v=8" />
+    <link rel="stylesheet" href="assets/css/mobile.css?v=8" />
+    <link rel="stylesheet" href="assets/css/community-card.css?v=1" />
+  </head>
+  <body class="cc-body">
+    <header class="cc-top">
+      <a class="brand" href="./" id="brand-logo">RanToAtlanta</a>
+      <span class="cc-top-label">Community Card Studio</span>
+      <a href="brand.html">Brand kit</a>
+    </header>
+
+    <section class="cc-hero">
+      <p class="kicker">Early supporters · NFTs · avatars</p>
+      <h1>Stamp the squad.</h1>
+      <p class="lede">
+        Drop a face, type a handle, export a share card — same energy as Pump.fun spotlight cards, with
+        <strong>RanToAtlanta</strong> branding.
+      </p>
+    </section>
+
+    <main class="cc-layout">
+      <aside class="cc-panel" aria-label="Card controls">
+        <label class="cc-field">
+          <span>Avatar / NFT</span>
+          <input type="file" id="cc-file" accept="image/*" />
+        </label>
+
+        <label class="cc-field">
+          <span>Username</span>
+          <input type="text" id="cc-user" value="@Cirrus" maxlength="32" autocomplete="off" spellcheck="false" />
+        </label>
+
+        <label class="cc-field">
+          <span>Footer label</span>
+          <input type="text" id="cc-footer" value="Now on" maxlength="24" />
+        </label>
+
+        <label class="cc-field">
+          <span>Brand name</span>
+          <input type="text" id="cc-brand" value="RanToAtlanta" maxlength="28" />
+        </label>
+
+        <label class="cc-field">
+          <span>Badge (optional)</span>
+          <input type="text" id="cc-badge" value="Early Supporter" maxlength="28" placeholder="Early Supporter" />
+        </label>
+
+        <fieldset class="cc-field">
+          <legend>Size</legend>
+          <div class="cc-seg">
+            <button type="button" class="is-on" data-size="1080">1:1 · 1080</button>
+            <button type="button" data-size="1350">Story · 1080×1350</button>
+          </div>
+        </fieldset>
+
+        <fieldset class="cc-field">
+          <legend>Vibe</legend>
+          <div class="cc-seg">
+            <button type="button" class="is-on" data-theme="cash">Cash Money green</button>
+            <button type="button" data-theme="flame">Flame orange</button>
+            <button type="button" data-theme="ink">Midnight</button>
+          </div>
+        </fieldset>
+
+        <div class="cc-actions">
+          <button type="button" class="primary" id="cc-download">Download PNG</button>
+          <button type="button" class="ghost" id="cc-copy">Copy image</button>
+        </div>
+
+        <p class="cc-hint">
+          Tip: paste an image with <kbd>⌘V</kbd> / <kbd>Ctrl+V</kbd>. Roster below fills the handle in one
+          tap.
+        </p>
+
+        <section class="cc-roster" aria-label="Early supporters">
+          <h2>Early roster</h2>
+          <div id="cc-roster" class="cc-roster-list"></div>
+          <p class="cc-hint">Edit <code>community/roster.json</code> to add names.</p>
+        </section>
+      </aside>
+
+      <section class="cc-stage" aria-label="Live preview">
+        <canvas id="cc-canvas" width="1080" height="1080"></canvas>
+        <p class="cc-stage-note">Live preview · export is full resolution</p>
+        <details class="cc-ref">
+          <summary>Reference style (Pump.fun spotlight)</summary>
+          <img
+            src="brand/promo/community/cirrus-pumpfun-reference.png"
+            alt="Reference community card style"
+            width="360"
+            height="360"
+          />
+        </details>
+      </section>
+    </main>
+
+    <footer class="cc-foot">
+      <span>© 2026 RanToAtlanta · Community cards for early believers</span>
+      <a href="birdman-5-star-stunna.html">5 ★ Stunna</a>
+      <a href="./">Home</a>
+    </footer>
+
+    <div id="points-toast" role="status"></div>
+    <script src="assets/js/points.js?v=8"></script>
+    <script src="assets/js/community-card.js?v=1"></script>
+  </body>
+</html>
