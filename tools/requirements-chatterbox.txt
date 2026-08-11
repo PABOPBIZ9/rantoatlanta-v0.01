@@ -1,0 +1,4 @@
+# Use with: uv pip install -r tools/requirements-chatterbox.txt
+# (inside tools/chatterbox-venv)
+chatterbox-tts==0.1.7
+setuptools>=70,<81

@@ -1,0 +1,230 @@
+/* Genius-style album page (5 ★ Stunna, etc.) */
+
+.album-page .album-hero {
+  display: grid;
+  grid-template-columns: minmax(180px, 280px) 1fr minmax(160px, 240px);
+  gap: 1.5rem;
+  align-items: start;
+  padding: 1.25rem var(--rta-pad, 1.25rem) 1.75rem;
+  background:
+    radial-gradient(circle at 20% 0%, rgba(255, 196, 60, 0.35), transparent 45%),
+    linear-gradient(160deg, #1a0f08 0%, #3d1f0a 40%, #ff8a1f 120%);
+  color: #fff;
+}
+
+.album-page .album-hero .cover {
+  width: 100%;
+  max-width: 280px;
+  aspect-ratio: 1;
+  object-fit: cover;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+}
+
+.album-page .album-hero .kicker {
+  margin: 0 0 0.35rem;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 236, 190, 0.9);
+}
+
+.album-page .album-hero h1 {
+  font-family: var(--rta-display);
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  margin: 0 0 0.35rem;
+  letter-spacing: 0.02em;
+}
+
+.album-page .album-hero .artist a,
+.album-page .album-hero .album-line a {
+  color: #ffe7b0;
+}
+
+.album-page .album-hero .meta-icons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem 1rem;
+  margin-top: 0.75rem;
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.album-main {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(260px, 0.85fr);
+  gap: 2rem;
+  align-items: start;
+  padding-top: 1.5rem;
+}
+
+.album-tracks {
+  list-style: none;
+  margin: 0 0 1.5rem;
+  padding: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.album-tracks li a {
+  display: grid;
+  grid-template-columns: 2rem 1fr auto;
+  gap: 0.75rem;
+  align-items: baseline;
+  padding: 0.7rem 0.35rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  text-decoration: none;
+  color: inherit;
+  min-height: 44px;
+}
+
+.album-tracks li a:hover,
+.album-tracks li a:focus-visible {
+  background: rgba(255, 138, 31, 0.08);
+  outline: none;
+}
+
+.album-tracks .n {
+  font-weight: 700;
+  color: #8a93a3;
+  font-variant-numeric: tabular-nums;
+}
+
+.album-tracks .t {
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.album-tracks .t em {
+  font-style: normal;
+  font-weight: 500;
+  color: #5c6473;
+}
+
+.album-tracks .v {
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: #8a93a3;
+  font-variant-numeric: tabular-nums;
+}
+
+.album-tracks li.hot .v {
+  color: #c45a00;
+}
+
+.album-tracks li.current a {
+  background: rgba(255, 138, 31, 0.12);
+  box-shadow: inset 3px 0 0 #ff8a1f;
+}
+
+.album-side {
+  display: grid;
+  gap: 1rem;
+}
+
+.side-card {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  padding: 1rem 1.05rem 1.15rem;
+  background: #fff;
+}
+
+.side-card h2 {
+  font-family: var(--rta-display);
+  font-size: 1.25rem;
+  margin: 0 0 0.75rem;
+}
+
+.album-credits {
+  grid-template-columns: 1fr;
+  margin-top: 0;
+}
+
+.contrib-board {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.35rem;
+}
+
+.contrib-board li {
+  display: grid;
+  grid-template-columns: 1.5rem 1fr auto auto;
+  gap: 0.5rem;
+  align-items: center;
+  font-size: 0.82rem;
+  padding: 0.35rem 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.contrib-board .rank {
+  font-weight: 800;
+  color: #8a93a3;
+}
+
+.contrib-board .name {
+  font-weight: 700;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.contrib-board .iq {
+  color: #5c6473;
+  font-variant-numeric: tabular-nums;
+}
+
+.contrib-board .ann {
+  font-weight: 800;
+  color: #c45a00;
+  min-width: 2rem;
+  text-align: right;
+}
+
+.related {
+  display: grid;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.related-card {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.7rem 0.8rem;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.related-card:hover {
+  border-color: #ff8a1f;
+}
+
+.related-card span {
+  color: #8a93a3;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.comment-tease {
+  margin-top: 1.5rem;
+}
+
+@media (max-width: 900px) {
+  .album-page .album-hero {
+    grid-template-columns: 1fr;
+    text-align: center;
+    justify-items: center;
+  }
+
+  .album-page .album-hero .media-rail {
+    width: 100%;
+    max-width: 320px;
+  }
+
+  .album-main {
+    grid-template-columns: 1fr;
+  }
+}

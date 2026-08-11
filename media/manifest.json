@@ -59,6 +59,18 @@
       "video": "media/embeds/video/neighborhood-superstar.mp4",
       "fallbackEmbed": "",
       "note": "Drop file to unlock on-site play"
+    },
+    {
+      "id": "pop-bottles",
+      "title": "Pop Bottles",
+      "artist": "Birdman",
+      "album": "5 ★ Stunna",
+      "cover": "assets/img/birdman-5-star-stunna.jpg",
+      "audio": "media/embeds/audio/pop-bottles.mp3",
+      "video": "media/embeds/video/pop-bottles.mp4",
+      "fallbackEmbed": "",
+      "href": "birdman-5-star-stunna.html#track-13",
+      "note": "Album page live — drop masters to unlock on-site play"
     }
   ]
 }

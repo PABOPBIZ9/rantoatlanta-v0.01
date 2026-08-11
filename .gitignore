@@ -8,3 +8,5 @@ reference/
 .env.local
 .env.*.local
 *.pem
+tools/chatterbox-venv/
+tools/chatterbox/
